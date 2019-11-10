@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using Subscription.Domain;
@@ -9,13 +8,16 @@ namespace Subscription.ViewModels
 {
     public class MainWindowModel
     {
-        public MainWindowModel()
+        private const int AppStartYear = 2019;
+        private const int ShowLastNumberOfYears = 2;
+        public MainWindowModel(IClock clock)
         {
+            var now = clock.UtcNow;
             Month.GetAllMonths().ForEach(a => Months.Add(a));
-            Enumerable.Range(2019, DateTime.Now.Year - 2017).ForEach(a => Years.Add(a));
-            var currentMonth = DateTime.Now.Month;
+            Enumerable.Range(2019, now.Year - (AppStartYear - ShowLastNumberOfYears)).ForEach(a => Years.Add(a));
+            var currentMonth = now.Month;
             SelectedMonth = new Month(currentMonth, DateTimeFormatInfo.CurrentInfo.GetMonthName(currentMonth));
-            SelectedYear = DateTime.Now.Year;
+            SelectedYear = now.Year;
         }
 
         public int SelectedYear { get; set; }
