@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using Subscription.Domain;
-using Subscription.Functional;
+using LaYumba.Functional;
 
 namespace Subscription.ViewModels
 {
@@ -18,15 +19,16 @@ namespace Subscription.ViewModels
             var currentMonth = now.Month;
             SelectedMonth = new Month(currentMonth, DateTimeFormatInfo.CurrentInfo.GetMonthName(currentMonth));
             SelectedYear = now.Year;
+            var subscribers = SubscriberRepository.GetAll();
+            Subscribers = subscribers;
         }
 
-        public int SelectedYear { get; set; }
-
-        public ObservableCollection<Month> Months { get; set; } = new ObservableCollection<Month>();
-
-        public ObservableCollection<int> Years { get; set; } = new ObservableCollection<int>();
-
+        public IList<Month> Months { get; set; } = new List<Month>();
         public Month SelectedMonth { get; set; }
 
+        public IList<int> Years { get; set; } = new List<int>();
+        public int SelectedYear { get; set; }
+
+        public IEnumerable<Subscriber> Subscribers { get; set; } 
     }
 }

@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="Subscription" Height="450" Width="800" WindowState="Maximized">
 
+    <Window.Resources>
+        <!-- DataGrid style -->
+        <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle1}"/>
+            <Setter Property="Foreground" Value="#FF3C3C3C"/>
+        </Style>
+        <!-- DataGridColumnHeader style -->
+        <Style x:Key="ColumnHeaderStyle1" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="ToolTip" Value="Click to sort."/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -21,11 +44,34 @@
             <ListBox x:Name="monthsListBox" ItemsSource="{Binding Months}" SelectedItem="{Binding SelectedMonth}" SelectionMode="Single" Margin = "12" />
             <Button x:Name="createNewMonthlySubscriptionButton" Margin="12">Create new</Button>
         </StackPanel>
-        <StackPanel Grid.Column="1">
-            <DataGrid Grid.Column="1" x:Name="dataGrid1" 
-                  Margin="12"
-                  AutoGenerateColumns="True">
+        <DataGrid Grid.Column="1" x:Name="subscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True}" 
+                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                EnableColumnVirtualization="True"
+                EnableRowVirtualization="True"
+                HorizontalGridLinesBrush="LightGray"
+                GridLinesVisibility="Horizontal"
+                RowHeight="26" 
+                Margin="12" 
+                Style="{DynamicResource DataGridStyle1}"
+                AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="150" Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
+                <DataGridTextColumn Width="75" Header="PostCode" Binding="{Binding PostCode}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="PostName" Binding="{Binding PostName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="Country" Binding="{Binding Country}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="Subscription Type" Binding="{Binding SubscriptionType}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="Business Type" Binding="{Binding BusinessType}"></DataGridTextColumn>
+                <DataGridTextColumn Width="75" Header="Copies" Binding="{Binding SubscriptionCopies}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Cancelled On" Binding="{Binding SubscriptionCancelledOn}"></DataGridTextColumn>
+                <DataGridTextColumn Width="200" Header="Cancellation Reason" Binding="{Binding CancellationReason}"></DataGridTextColumn>
+                <DataGridTextColumn Width="200" Header="Is Paid" Binding="{Binding IsPaid}"></DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
-        </StackPanel>
     </Grid>
 </Window>

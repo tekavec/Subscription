@@ -1,6 +1,8 @@
-﻿namespace Subscription.Domain
+﻿using System.ComponentModel;
+
+namespace Subscription.Domain
 {
-    public class Subscriber
+    public class Subscriber : INotifyPropertyChanged, IEditableObject
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -14,5 +16,18 @@
         public string SubscriptionCancelledOn { get; set; }
         public string CancellationReason { get; set; }
         public bool IsPaid { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void BeginEdit()
+        {
+        }
+
+        public void CancelEdit()
+        {
+        }
+
+        public void EndEdit()
+        {
+        }
     }
 }
