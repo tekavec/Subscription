@@ -1,0 +1,50 @@
+﻿<Window x:Class="Subscription.Dialogs.CreateDataSourceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subscription.Dialogs"
+        mc:Ignorable="d"
+        Title="Create Data Source" Height="320" Width="500" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="MinWidth" Value="100"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Width" Value="160"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="12">
+            <Label>Please select year and month you want to copy data from and to.</Label>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Margin="12">
+                <Label>Copy from:</Label>
+                <ComboBox  x:Name="FromYearsComboBox" ItemsSource="{Binding FromYears}" SelectedItem="{Binding SelectedFromYear}" Margin="12" />
+                <ComboBox  x:Name="FromMonthsComboBox" ItemsSource="{Binding FromMonths}" SelectedItem="{Binding SelectedFromMonth}" Margin="12" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center">
+                <Label FontSize="36" Foreground="Gray">-></Label>
+            </StackPanel>
+            <StackPanel Margin="12">
+                <Label>To:</Label>
+                <ComboBox  x:Name="ToYearsComboBox" ItemsSource="{Binding ToYears}" SelectedItem="{Binding SelectedToYear}" Margin="12" />
+                <ComboBox  x:Name="ToMonthsComboBox" ItemsSource="{Binding ToMonths}" SelectedItem="{Binding SelectedToMonth}" Margin="12" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="CreateNewMonthlySubscriptionButton" Margin="12" Click="CreateNewMonthlySubscriptionButton_OnClick">Create new</Button>
+            <Button x:Name="CancelButton" Margin="12" Click="CancelButton_OnClick">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

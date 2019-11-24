@@ -11,24 +11,27 @@ namespace Subscription.ViewModels
     {
         private const int AppStartYear = 2019;
         private const int ShowLastNumberOfYears = 2;
+        public IList<Month> Months { get; set; } = new List<Month>();
+        public Month SelectedMonth { get; set; }
+        public IList<int> Years { get; set; } = new List<int>();
+        public int SelectedYear { get; set; }
+        public IEnumerable<Subscriber> Subscribers { get; set; } 
+        
         public MainWindowModel(IClock clock)
         {
             var now = clock.UtcNow;
             Month.GetAllMonths().ForEach(a => Months.Add(a));
             Enumerable.Range(2019, now.Year - (AppStartYear - ShowLastNumberOfYears)).ForEach(a => Years.Add(a));
             var currentMonth = now.Month;
-            SelectedMonth = new Month(currentMonth, DateTimeFormatInfo.CurrentInfo.GetMonthName(currentMonth));
+            SelectedMonth = new Month(currentMonth);
             SelectedYear = now.Year;
-            var subscribers = SubscriberRepository.GetAll();
+            var subscribers = SubscriberRepository.GetAll(GetSelectedYearAndMonth());
             Subscribers = subscribers;
         }
 
-        public IList<Month> Months { get; set; } = new List<Month>();
-        public Month SelectedMonth { get; set; }
-
-        public IList<int> Years { get; set; } = new List<int>();
-        public int SelectedYear { get; set; }
-
-        public IEnumerable<Subscriber> Subscribers { get; set; } 
+        private YearAndMonth GetSelectedYearAndMonth()
+        {
+            return new YearAndMonth(SelectedYear, SelectedMonth);
+        }
     }
 }

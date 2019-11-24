@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Subscription"
         mc:Ignorable="d"
-        Title="Subscription" Height="450" Width="800" WindowState="Maximized">
+        Title="Subscription" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <!-- DataGrid style -->
@@ -29,6 +29,9 @@
         <Style TargetType="{x:Type DataGridCell}">
             <Setter Property="VerticalAlignment" Value="Bottom" />
         </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="5"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,15 +39,21 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0">
-            <ComboBox  x:Name="yearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Margin="12">
+        <ToolBarTray Background="White" Grid.Column="0" Grid.ColumnSpan="2" >
+            <ToolBar Band="1" BandIndex="1">
+                <Button x:Name="CreateNewDataSource" Click="CreateNewDataSource_OnClick">Create new</Button>
+            </ToolBar>
+        </ToolBarTray>
+        <StackPanel Grid.Column="0" Grid.Row="1" >
+            <ComboBox  x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Margin="12">
             </ComboBox>
-            <ListBox x:Name="monthsListBox" ItemsSource="{Binding Months}" SelectedItem="{Binding SelectedMonth}" SelectionMode="Single" Margin = "12" />
-            <Button x:Name="createNewMonthlySubscriptionButton" Margin="12">Create new</Button>
+            <ListBox x:Name="MonthsListBox" ItemsSource="{Binding Months}" SelectedItem="{Binding SelectedMonth}" SelectionMode="Single" Margin = "12" />
+            <Button x:Name="CreateNewMonthlySubscriptionButton" Margin="12">Create new</Button>
         </StackPanel>
-        <DataGrid Grid.Column="1" x:Name="subscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True}" 
+        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="subscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True}" 
                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                 EnableColumnVirtualization="True"

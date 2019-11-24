@@ -5,10 +5,10 @@ namespace Subscription.Domain
 {
     public struct Month
     {
-        public Month(int number, string name)
+        public Month(int number)
         {
             Number = number;
-            Name = name;
+            Name = DateTimeFormatInfo.CurrentInfo.GetMonthName(number);
         }
 
         public int Number { get; }
@@ -19,7 +19,7 @@ namespace Subscription.Domain
         {
             for (var i = 1; i <= 12; i++)
             {
-                yield return new Month (i, DateTimeFormatInfo.CurrentInfo.GetMonthName(i));
+                yield return new Month (i);
             }
         }
     }
