@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Subscription.Annotations;
 
 namespace Subscription.Domain
 {
@@ -28,6 +30,12 @@ namespace Subscription.Domain
 
         public void EndEdit()
         {
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

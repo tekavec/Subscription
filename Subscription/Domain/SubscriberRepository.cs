@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -19,15 +20,13 @@ namespace Subscription.Domain
         
         public static IEnumerable<Subscriber> GetAll(YearAndMonth yearAndMonth)
         {
-            var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
-            var file = Path.Combine(dataFolder, $"{SubscribersPrefix}_{yearAndMonth.Year}_{yearAndMonth.Month.Number:00}{SubscribersExtension}");
+            var file = GetFilePath(yearAndMonth);
             if (!File.Exists(file))
                 return Enumerable.Empty<Subscriber>();
 
             using var reader = new StreamReader(file, Encoding.UTF8);
-            var csvReader = new CsvReader(reader);
-            var records = csvReader.GetRecords<Subscriber>();
-            return records.ToArray();
+            using var csvReader = new CsvReader(reader, GetCsvConfiguration());
+            return csvReader.GetRecords<Subscriber>().ToArray();
         }
 
         public static Exceptional<Unit> CopyDataSource(CopyFilesParams copyFilesParams)
@@ -56,6 +55,39 @@ namespace Subscription.Domain
         public static Exceptional<Unit> ExportDataSource(ExportParams exportParams)
         {
             return Unit();
+        }
+
+        public static Exceptional<Unit> Save(IEnumerable<Subscriber> subscribers, YearAndMonth yearAndMonth)
+        {
+            try
+            {
+                var file = GetFilePath(yearAndMonth);
+                using var writer = new StreamWriter(file);
+                using var csvWriter = new CsvWriter(writer, GetCsvConfiguration());
+                csvWriter.WriteHeader<Subscriber>();
+                csvWriter.NextRecord();
+                csvWriter.WriteRecords(subscribers);
+                csvWriter.Flush();
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+
+            return Unit();
+        }
+
+        private static CsvHelper.Configuration.Configuration GetCsvConfiguration() =>
+            new CsvHelper.Configuration.Configuration
+            {
+                Delimiter = ConfigurationManager.AppSettings["DataSourceDelimiter"]
+            };
+
+        private static string GetFilePath(YearAndMonth yearAndMonth)
+        {
+            var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
+            return Path.Combine(dataFolder,
+                $"{SubscribersPrefix}_{yearAndMonth.Year}_{yearAndMonth.Month.Number:00}{SubscribersExtension}");
         }
     }
 }

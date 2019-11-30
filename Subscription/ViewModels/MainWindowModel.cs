@@ -55,5 +55,10 @@ namespace Subscription.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void SaveDataSource()
+        {
+            SubscriberRepository.Save(Subscribers.AsEnumerable(), GetSelectedYearAndMonth());
+        }
     }
 }

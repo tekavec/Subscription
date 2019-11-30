@@ -44,6 +44,7 @@
         </Grid.RowDefinitions>
         <ToolBarTray Background="White" Grid.Column="0" Grid.ColumnSpan="2" >
             <ToolBar Band="1" BandIndex="1" >
+                <Button Margin="12,6" x:Name="SaveDataSourceButton" Click="SaveDataSourceButton_OnClick">Save</Button>
                 <Button Margin="12,6" x:Name="CreateNewDataSourceButton" Click="CreateNewDataSourceButton_OnClick">Create new data source</Button>
                 <Button Margin="12,6" x:Name="ExportDataSourceButton" Click="ExportDataSourceButton_OnClick">Export data source</Button>
             </ToolBar>

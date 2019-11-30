@@ -37,5 +37,10 @@ namespace Subscription
         {
             model.OnMonthSelectionChanged();
         }
+
+        private void SaveDataSourceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            model.SaveDataSource();
+        }
     }
 }
