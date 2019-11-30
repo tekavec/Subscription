@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using CsvHelper;
 using LaYumba.Functional;
+using Subscription.Dialogs;
 using static LaYumba.Functional.F;
 using Unit = System.ValueTuple;
 
@@ -31,17 +32,17 @@ namespace Subscription.Domain
 
         public static Exceptional<Unit> CopyDataSource(CopyFilesParams copyFilesParams)
         {
-            var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
-            var sourceFile = Path.Combine(dataFolder, $"{SubscribersPrefix}_{copyFilesParams.From.Year}_{copyFilesParams.From.Month.Number:00}{SubscribersExtension}");
-            if (!File.Exists(sourceFile))
-                return new FileNotFoundException("Source file not found.", sourceFile);
-            
-            var destinationFile = Path.Combine(dataFolder, $"{SubscribersPrefix}_{copyFilesParams.To.Year}_{copyFilesParams.To.Month.Number:00}{SubscribersExtension}");
-            if (File.Exists(destinationFile))
-                return new ArgumentException("Target file already exists.", destinationFile);
-
             try
             {
+                var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
+                var sourceFile = Path.Combine(dataFolder, $"{SubscribersPrefix}_{copyFilesParams.From.Year}_{copyFilesParams.From.Month.Number:00}{SubscribersExtension}");
+                if (!File.Exists(sourceFile))
+                    return new FileNotFoundException("Source file not found.", sourceFile);
+                
+                var destinationFile = Path.Combine(dataFolder, $"{SubscribersPrefix}_{copyFilesParams.To.Year}_{copyFilesParams.To.Month.Number:00}{SubscribersExtension}");
+                if (File.Exists(destinationFile))
+                    return new ArgumentException("Target file already exists.", destinationFile);
+
                 File.Copy(sourceFile, destinationFile);
             }
             catch (Exception ex)
@@ -49,6 +50,11 @@ namespace Subscription.Domain
                 return ex;
             }
 
+            return Unit();
+        }
+
+        public static Exceptional<Unit> ExportDataSource(ExportParams exportParams)
+        {
             return Unit();
         }
     }

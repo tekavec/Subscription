@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Subscription.Dialogs;
 using Subscription.Domain;
 using Subscription.ViewModels;
@@ -15,7 +16,7 @@ namespace Subscription
             DataContext = model;
         }
 
-        private void CreateNewDataSource_OnClick(object sender, RoutedEventArgs e)
+        private void CreateNewDataSourceButton_OnClick(object sender, RoutedEventArgs e)
         {
             var createDataSource = new CreateDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.CopyDataSource);
             createDataSource.ShowDialog();
@@ -25,5 +26,16 @@ namespace Subscription
             new YearAndMonth(
                 model.Years[this.YearsComboBox.SelectedIndex], 
                 model.Months[this.MonthsListBox.SelectedIndex]);
+
+        private void ExportDataSourceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var exportDataSourceDialog = new ExportDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.ExportDataSource);
+            exportDataSourceDialog.ShowDialog();
+        }
+
+        private void MonthsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            model.OnMonthSelectionChanged();
+        }
     }
 }

@@ -43,17 +43,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBarTray Background="White" Grid.Column="0" Grid.ColumnSpan="2" >
-            <ToolBar Band="1" BandIndex="1">
-                <Button x:Name="CreateNewDataSource" Click="CreateNewDataSource_OnClick">Create new</Button>
+            <ToolBar Band="1" BandIndex="1" >
+                <Button Margin="12,6" x:Name="CreateNewDataSourceButton" Click="CreateNewDataSourceButton_OnClick">Create new data source</Button>
+                <Button Margin="12,6" x:Name="ExportDataSourceButton" Click="ExportDataSourceButton_OnClick">Export data source</Button>
             </ToolBar>
         </ToolBarTray>
         <StackPanel Grid.Column="0" Grid.Row="1" >
+            <Label Margin="12" FontWeight="Bold">Select year and month:</Label>
             <ComboBox  x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Margin="12">
             </ComboBox>
-            <ListBox x:Name="MonthsListBox" ItemsSource="{Binding Months}" SelectedItem="{Binding SelectedMonth}" SelectionMode="Single" Margin = "12" />
-            <Button x:Name="CreateNewMonthlySubscriptionButton" Margin="12">Create new</Button>
+            <ListBox x:Name="MonthsListBox" 
+                     ItemsSource="{Binding Months}" 
+                     SelectedItem="{Binding SelectedMonth}" 
+                     SelectionMode="Single"
+                     SelectionChanged="MonthsListBox_OnSelectionChanged"
+                     Margin= "12" />
+            <Button x:Name="CreateNewMonthlySubscriptionButton" Margin="12">Create new data source</Button>
+            <Button x:Name="ExportSubscriptionButton" Margin="12">Export data source</Button>
         </StackPanel>
-        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="subscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True}" 
+        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="subscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True, Mode=TwoWay}" 
                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                 EnableColumnVirtualization="True"

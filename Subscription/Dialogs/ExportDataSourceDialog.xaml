@@ -1,0 +1,51 @@
+﻿<Window x:Class="Subscription.Dialogs.ExportDataSourceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subscription.Dialogs"
+        mc:Ignorable="d"
+        Title="Export Data Source" Height="360" Width="640" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="MinWidth" Value="100"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Width" Value="160"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="12">
+            <Label>Please setup export options:</Label>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
+            <StackPanel Margin="24,6" Orientation="Horizontal">
+                <Label Margin="6" Width="200">Select year and month:</Label>
+                <ComboBox Margin="6" x:Name="FromYearsComboBox" ItemsSource="{Binding FromYears}" SelectedItem="{Binding SelectedFromYear}"  />
+                <ComboBox Margin="6" x:Name="FromMonthsComboBox" ItemsSource="{Binding FromMonths}" SelectedItem="{Binding SelectedFromMonth}" />
+            </StackPanel>
+            <StackPanel Margin="24,6" Orientation="Horizontal">
+                <Label Margin="6" Width="200">Select merge file:</Label>
+                <TextBox Margin="6" x:Name="MergeFilePathTextBox" Text="{Binding Path=FolderNameWithPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" Width="250"    />
+                <Button Margin="6" Padding="12,0" MinWidth="0" Content="Browse" Click="BrowseMergeFileButton_OnClick"/>
+            </StackPanel>
+            <StackPanel Margin="24,6" Orientation="Horizontal">
+                <Label Margin="6" Width="200">Clone rows for multiple copies:</Label>
+                <CheckBox Margin="6" VerticalAlignment="Center" x:Name="CloneRowsForMultipleCopiesCheckBox" IsChecked="True" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="ExportButton" Margin="12" Click="ExportButton_OnClick">Export</Button>
+            <Button x:Name="CancelButton" Margin="12" Click="CancelButton_OnClick">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

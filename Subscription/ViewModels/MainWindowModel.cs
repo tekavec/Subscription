@@ -1,21 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Subscription.Domain;
 using LaYumba.Functional;
+using Subscription.Annotations;
 
 namespace Subscription.ViewModels
 {
-    public class MainWindowModel
+    public class MainWindowModel : INotifyPropertyChanged
     {
+        private ObservableCollection<Subscriber> subscribers;
         private const int AppStartYear = 2019;
         private const int ShowLastNumberOfYears = 2;
         public IList<Month> Months { get; set; } = new List<Month>();
         public Month SelectedMonth { get; set; }
         public IList<int> Years { get; set; } = new List<int>();
         public int SelectedYear { get; set; }
-        public IEnumerable<Subscriber> Subscribers { get; set; } 
+
+        public ObservableCollection<Subscriber> Subscribers
+        {
+            get => subscribers;
+            set
+            {
+                subscribers = value;
+                OnPropertyChanged(nameof(Subscribers));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         
         public MainWindowModel(IClock clock)
         {
@@ -25,13 +39,21 @@ namespace Subscription.ViewModels
             var currentMonth = now.Month;
             SelectedMonth = new Month(currentMonth);
             SelectedYear = now.Year;
-            var subscribers = SubscriberRepository.GetAll(GetSelectedYearAndMonth());
-            Subscribers = subscribers;
+            Subscribers = new ObservableCollection<Subscriber>();
         }
 
-        private YearAndMonth GetSelectedYearAndMonth()
+        public void OnMonthSelectionChanged()
         {
-            return new YearAndMonth(SelectedYear, SelectedMonth);
+            var allSubscribers= SubscriberRepository.GetAll(GetSelectedYearAndMonth());
+            Subscribers = new ObservableCollection<Subscriber>(allSubscribers);
+        }
+
+        private YearAndMonth GetSelectedYearAndMonth() => new YearAndMonth(SelectedYear, SelectedMonth);
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
