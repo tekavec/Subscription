@@ -3,15 +3,17 @@ name: .NET Core
 on: [push]
 
 jobs:
-  build:
+  build_and_test:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET Core if needed
+      uses: actions/setup-dotnet@v1.2.0
       with:
-        dotnet-version: 2.2.108
+        dotnet-version: 3.0.100
+    - uses: actions/checkout@v1
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build -c Release
+    - name: Test with dotnet
+      run: dotnet test -c Release      
