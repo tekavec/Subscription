@@ -35,12 +35,12 @@
             </StackPanel>
             <StackPanel Margin="24,6" Orientation="Horizontal">
                 <Label Margin="6" Width="200">Select merge file:</Label>
-                <TextBox Margin="6" x:Name="MergeFilePathTextBox" Text="{Binding Path=FolderNameWithPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" Width="250"    />
+                <TextBox Margin="6" x:Name="MergeFilePathTextBox" Text="{Binding Path=MergeFilePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" Width="250"    />
                 <Button Margin="6" Padding="12,0" MinWidth="0" Content="Browse" Click="BrowseMergeFileButton_OnClick"/>
             </StackPanel>
             <StackPanel Margin="24,6" Orientation="Horizontal">
                 <Label Margin="6" Width="200">Clone rows for multiple copies:</Label>
-                <CheckBox Margin="6" VerticalAlignment="Center" x:Name="CloneRowsForMultipleCopiesCheckBox" IsChecked="True" />
+                <CheckBox Margin="6" VerticalAlignment="Center" x:Name="CloneRowsForMultipleCopiesCheckBox" IsChecked="{Binding CloneRowsForMultipleCopies}" />
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">

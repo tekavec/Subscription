@@ -11,12 +11,29 @@ namespace Subscription.ViewModels
 {
     public class MainWindowModel : INotifyPropertyChanged
     {
+        public MainWindowModel(IClock clock)
+        {
+            var now = clock.UtcNow;
+            Month.GetAllMonths().ForEach(a => Months.Add(a));
+            Enumerable.Range(2019, now.Year - (AppStartYear - ShowLastNumberOfYears)).ForEach(a => Years.Add(a));
+            var currentMonth = now.Month;
+            SelectedMonth = new Month(currentMonth);
+            SelectedYear = now.Year;
+            Subscribers = new ObservableCollection<Subscriber>();
+        }
+
         private ObservableCollection<Subscriber> subscribers;
+
         private const int AppStartYear = 2019;
+
         private const int ShowLastNumberOfYears = 2;
+
         public IList<Month> Months { get; set; } = new List<Month>();
+
         public Month SelectedMonth { get; set; }
+
         public IList<int> Years { get; set; } = new List<int>();
+
         public int SelectedYear { get; set; }
 
         public ObservableCollection<Subscriber> Subscribers
@@ -30,17 +47,6 @@ namespace Subscription.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
-        public MainWindowModel(IClock clock)
-        {
-            var now = clock.UtcNow;
-            Month.GetAllMonths().ForEach(a => Months.Add(a));
-            Enumerable.Range(2019, now.Year - (AppStartYear - ShowLastNumberOfYears)).ForEach(a => Years.Add(a));
-            var currentMonth = now.Month;
-            SelectedMonth = new Month(currentMonth);
-            SelectedYear = now.Year;
-            Subscribers = new ObservableCollection<Subscriber>();
-        }
 
         public void OnMonthSelectionChanged()
         {

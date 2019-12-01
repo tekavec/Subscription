@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Subscription.Domain;
 using Subscription.ViewModels;
 
-namespace Subscription.UnitTests
+namespace Subscription.UnitTests.ViewModels
 {
     public class MainWindowModelShould
     {
