@@ -42,13 +42,11 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ToolBarTray Background="White" Grid.Column="0" Grid.ColumnSpan="2" >
-            <ToolBar Band="1" BandIndex="1" >
-                <Button Margin="12,6" x:Name="SaveDataSourceButton" Click="SaveDataSourceButton_OnClick">Save</Button>
-                <Button Margin="12,6" x:Name="CreateNewDataSourceButton" Click="CreateNewDataSourceButton_OnClick">Create new data source</Button>
-                <Button Margin="12,6" x:Name="ExportDataSourceButton" Click="ExportDataSourceButton_OnClick">Export data source</Button>
+            <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button Margin="12,6" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">Save</Button>
+                <Button Margin="12,6" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">Create new data source</Button>
+                <Button Margin="12,6" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">Export data source</Button>
             </ToolBar>
-        </ToolBarTray>
         <StackPanel Grid.Column="0" Grid.Row="1" >
             <Label Margin="12" FontWeight="Bold">Select year and month:</Label>
             <ComboBox  x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Margin="12">
@@ -59,8 +57,8 @@
                      SelectionMode="Single"
                      SelectionChanged="MonthsListBox_OnSelectionChanged"
                      Margin= "12" />
-            <Button x:Name="CreateNewMonthlySubscriptionButton" Margin="12">Create new data source</Button>
-            <Button x:Name="ExportSubscriptionButton" Margin="12">Export data source</Button>
+            <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12">Create new data source</Button>
+            <Button x:Name="ExportDataSourceButton" Click="ExportDataSource_OnClick" Margin="12">Export data source</Button>
         </StackPanel>
         <DataGrid Grid.Column="1" Grid.Row="1" x:Name="subscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True, Mode=TwoWay}" 
                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
@@ -77,7 +75,7 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="150" Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                 <DataGridTextColumn Width="150" Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Width="150" Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
                 <DataGridTextColumn Width="75" Header="PostCode" Binding="{Binding PostCode}"></DataGridTextColumn>

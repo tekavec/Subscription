@@ -19,6 +19,8 @@ namespace Subscription.ViewModels
             var currentMonth = now.Month;
             SelectedMonth = new Month(currentMonth);
             SelectedYear = now.Year;
+            previousSelectedMonth = SelectedMonth;
+            previousSelectedYear = SelectedYear;
             Subscribers = new ObservableCollection<Subscriber>();
         }
 
@@ -27,6 +29,12 @@ namespace Subscription.ViewModels
         private const int AppStartYear = 2019;
 
         private const int ShowLastNumberOfYears = 2;
+
+        private Month previousSelectedMonth;
+
+        private int previousSelectedYear;
+
+        private bool isDirty = false;
 
         public IList<Month> Months { get; set; } = new List<Month>();
 
@@ -51,7 +59,14 @@ namespace Subscription.ViewModels
         public void OnMonthSelectionChanged()
         {
             var allSubscribers= SubscriberRepository.GetAll(GetSelectedYearAndMonth());
+            allSubscribers.ForEach(a => a.PropertyChanged += Subscriber_PropertyChanged);
             Subscribers = new ObservableCollection<Subscriber>(allSubscribers);
+            isDirty = false;
+        }
+
+        private void Subscriber_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            isDirty = true;
         }
 
         private YearAndMonth GetSelectedYearAndMonth() => new YearAndMonth(SelectedYear, SelectedMonth);
@@ -64,7 +79,23 @@ namespace Subscription.ViewModels
 
         public void SaveDataSource()
         {
+            if (!isDirty) return;
             SubscriberRepository.Save(Subscribers.AsEnumerable(), GetSelectedYearAndMonth());
+            isDirty = false;
+        }
+
+        public void SavePreviousSelected()
+        {
+            if (isDirty)
+            {
+                SubscriberRepository.Save(
+                    Subscribers.AsEnumerable(),
+                    new YearAndMonth(previousSelectedYear, previousSelectedMonth));
+            }
+            
+            previousSelectedMonth = SelectedMonth;
+            previousSelectedYear = SelectedYear;
+            isDirty = false;
         }
     }
 }

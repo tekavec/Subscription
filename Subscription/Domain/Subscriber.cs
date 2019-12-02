@@ -4,33 +4,142 @@ using Subscription.Annotations;
 
 namespace Subscription.Domain
 {
-    public class Subscriber : INotifyPropertyChanged, IEditableObject
+    public class Subscriber : INotifyPropertyChanged
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; }
-        public string PostCode { get; set; }
-        public string PostName { get; set; }
-        public string Country { get; set; }
-        public string SubscriptionType { get; set; }
-        public string BusinessType { get; set; }
-        public int SubscriptionCopies { get; set; }
-        public string SubscriptionCancelledOn { get; set; }
-        public string CancellationReason { get; set; }
-        public bool IsPaid { get; set; }
+        private string firstName;
+        private string lastName;
+        private string address;
+        private string postCode;
+        private string postName;
+        private string country;
+        private string subscriptionType;
+        private string businessType;
+        private int subscriptionCopies;
+        private string subscriptionCancelledOn;
+        private string cancellationReason;
+        private bool isPaid;
+
+        public string FirstName
+        {
+            get => firstName;
+            set
+            {
+                firstName = value;
+                OnPropertyChanged(nameof(FirstName));
+            }
+        }
+
+        public string LastName
+        {
+            get => lastName;
+            set
+            {
+                lastName = value;
+                OnPropertyChanged(nameof(LastName));
+            }
+        }
+
+        public string Address
+        {
+            get => address;
+            set
+            {
+                address = value;
+                OnPropertyChanged(nameof(Address));
+            }
+        }
+
+        public string PostCode
+        {
+            get => postCode;
+            set
+            {
+                postCode = value;
+                OnPropertyChanged(nameof(PostCode));
+            }
+        }
+
+        public string PostName
+        {
+            get => postName;
+            set
+            {
+                postName = value;
+                OnPropertyChanged(nameof(PostName));
+            }
+        }
+
+        public string Country
+        {
+            get => country;
+            set
+            {
+                country = value;
+                OnPropertyChanged(nameof(Country));
+            }
+        }
+
+        public string SubscriptionType
+        {
+            get => subscriptionType;
+            set
+            {
+                subscriptionType = value;
+                OnPropertyChanged(nameof(SubscriptionType));
+            }
+        }
+
+        public string BusinessType
+        {
+            get => businessType;
+            set
+            {
+                businessType = value;
+                OnPropertyChanged(nameof(BusinessType));
+            }
+        }
+
+        public int SubscriptionCopies
+        {
+            get => subscriptionCopies;
+            set
+            {
+                subscriptionCopies = value;
+                OnPropertyChanged(nameof(SubscriptionCopies));
+            }
+        }
+
+        public string SubscriptionCancelledOn
+        {
+            get => subscriptionCancelledOn;
+            set
+            {
+                subscriptionCancelledOn = value;
+                OnPropertyChanged(nameof(SubscriptionCancelledOn));
+            }
+        }
+
+        public string CancellationReason
+        {
+            get => cancellationReason;
+            set
+            {
+                cancellationReason = value;
+                OnPropertyChanged(nameof(CancellationReason));
+            }
+        }
+
+        public bool IsPaid
+        {
+            get => isPaid;
+            set
+            {
+                isPaid = value;
+                OnPropertyChanged(nameof(IsPaid));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void BeginEdit()
-        {
-        }
-
-        public void CancelEdit()
-        {
-        }
-
-        public void EndEdit()
-        {
-        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

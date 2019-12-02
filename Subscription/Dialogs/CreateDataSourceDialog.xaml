@@ -34,7 +34,7 @@
                 <ComboBox  x:Name="FromMonthsComboBox" ItemsSource="{Binding FromMonths}" SelectedItem="{Binding SelectedFromMonth}" Margin="12" />
             </StackPanel>
             <StackPanel VerticalAlignment="Center">
-                <Label FontSize="36" Foreground="Gray">-></Label>
+                <Label FontSize="42" Margin="12,0,12,24"  Foreground="#FFCBCBCB">></Label>
             </StackPanel>
             <StackPanel Margin="12">
                 <Label>To:</Label>

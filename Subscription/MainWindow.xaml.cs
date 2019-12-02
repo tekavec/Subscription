@@ -16,31 +16,39 @@ namespace Subscription
             DataContext = model;
         }
 
-        private void CreateNewDataSourceButton_OnClick(object sender, RoutedEventArgs e)
+        private void MonthsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            model.SavePreviousSelected();
+            model.OnMonthSelectionChanged();
+        }
+
+        private void CreateNewDataSource_OnClick(object sender, RoutedEventArgs e)
+        {
+            Save();
             var createDataSource = new CreateDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.CopyDataSource);
             createDataSource.ShowDialog();
+        }
+
+        private void ExportDataSource_OnClick(object sender, RoutedEventArgs e)
+        {
+            Save();
+            var exportDataSourceDialog = new ExportDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.ExportDataSource);
+            exportDataSourceDialog.ShowDialog();
+        }
+
+        private void SaveDataSource_OnClick(object sender, RoutedEventArgs e)
+        {
+            Save();
+        }
+
+        private void Save()
+        {
+            model.SaveDataSource();
         }
 
         private YearAndMonth GetCopyFromToParams() => 
             new YearAndMonth(
                 model.Years[this.YearsComboBox.SelectedIndex], 
                 model.Months[this.MonthsListBox.SelectedIndex]);
-
-        private void ExportDataSourceButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var exportDataSourceDialog = new ExportDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.ExportDataSource);
-            exportDataSourceDialog.ShowDialog();
-        }
-
-        private void MonthsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            model.OnMonthSelectionChanged();
-        }
-
-        private void SaveDataSourceButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            model.SaveDataSource();
-        }
     }
 }
