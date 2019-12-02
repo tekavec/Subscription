@@ -5,15 +5,18 @@
         public YearAndMonth FromYearAndMonth { get; }
         public bool CloneRowsForMultipleCopies { get; }
         public string MergeFile { get; }
+        public string ExportFile { get; }
 
         public ExportParams(
             YearAndMonth fromYearAndMonth, 
             bool cloneRowsForMultipleCopies, 
-            string mergeFile = "")
+            string mergeFile = "",
+            string exportFile = "")
         {
             FromYearAndMonth = fromYearAndMonth;
             CloneRowsForMultipleCopies = cloneRowsForMultipleCopies;
             MergeFile = mergeFile;
+            ExportFile = exportFile;
         }
     }
 }

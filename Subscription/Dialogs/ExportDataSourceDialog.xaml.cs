@@ -46,7 +46,8 @@ namespace Subscription.Dialogs
                 var exportParams = new ExportParams(
                     new YearAndMonth(model.SelectedFromYear, model.SelectedFromMonth), 
                     model.CloneRowsForMultipleCopies, 
-                    model.MergeFilePath);
+                    model.MergeFilePath,
+                    saveFileDialog.FileName);
                 mergeAndExport(exportParams);
             }
         }

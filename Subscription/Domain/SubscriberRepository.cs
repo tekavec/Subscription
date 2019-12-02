@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
+using ClosedXML.Excel;
 using CsvHelper;
 using LaYumba.Functional;
-using Subscription.Dialogs;
 using static LaYumba.Functional.F;
 using Unit = System.ValueTuple;
 
@@ -54,6 +53,44 @@ namespace Subscription.Domain
 
         public static Exceptional<Unit> ExportDataSource(ExportParams exportParams)
         {
+            try
+            {
+                var subscriberExports = Enumerable.Empty<SubscriberExport>();
+                if (!string.IsNullOrEmpty(exportParams.MergeFile))
+                {
+                    if (File.Exists(exportParams.MergeFile))
+                    {
+                        using var reader = new StreamReader(exportParams.MergeFile, Encoding.UTF8);
+                        using var csvReader = new CsvReader(reader, GetCsvConfiguration());
+                        subscriberExports = csvReader.GetRecords<SubscriberExport>();
+                    }
+
+                }
+
+                var internalSubscribers = GetAll(exportParams.FromYearAndMonth);
+                var internalSubscribersExport = internalSubscribers
+                    .Where(a => a.IsPaid)
+                    .Select(a =>
+                        new SubscriberExport(
+                            a.FirstName,
+                            a.LastName,
+                            a.Address,
+                            a.PostCode,
+                            a.PostName,
+                            a.Country));
+                internalSubscribersExport.ForEach(a => subscriberExports.Append(a));
+
+
+                var wb = new XLWorkbook();
+                var ws = wb.Worksheets.Add("Lovec");
+                ws.Cell(1, 1).Value = internalSubscribersExport.AsEnumerable();
+                wb.SaveAs(exportParams.ExportFile);
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+
             return Unit();
         }
 

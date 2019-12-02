@@ -48,12 +48,12 @@ namespace Subscription.Dialogs
 
         private YearAndMonth GetFromParams() =>
             new YearAndMonth(
-                model.FromYears[this.FromYearsComboBox.SelectedIndex],
-                model.FromMonths[this.FromMonthsComboBox.SelectedIndex]);
+                model.SelectedFromYear,
+                model.SelectedFromMonth);
 
         private YearAndMonth GetToParams() =>
             new YearAndMonth(
-                model.ToYears[this.ToYearsComboBox.SelectedIndex],
-                model.ToMonths[this.ToMonthsComboBox.SelectedIndex]);
+                model.SelectedToYear,
+                model.SelectedToMonth);
     }
 }
