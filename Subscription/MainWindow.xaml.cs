@@ -50,5 +50,27 @@ namespace Subscription
             new YearAndMonth(
                 model.Years[this.YearsComboBox.SelectedIndex], 
                 model.Months[this.MonthsListBox.SelectedIndex]);
+
+        private void SubscribersDataGrid_OnAddingNewItem(object sender, AddingNewItemEventArgs e)
+        {
+            model.MakeDirty();
+        }
+
+        private void DeleteButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show(
+                    "Do you want to delete this row?",
+                    "Question",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                var subscriber = this.SubscribersDataGrid.SelectedItem;
+                if (subscriber != null)
+                {
+                    model.Subscribers.Remove((Subscriber) subscriber);
+                    model.MakeDirty();
+                }
+            }
+        }
     }
 }

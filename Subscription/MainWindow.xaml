@@ -60,17 +60,19 @@
             <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12">Create new data source</Button>
             <Button x:Name="ExportDataSourceButton" Click="ExportDataSource_OnClick" Margin="12">Export data source</Button>
         </StackPanel>
-        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="subscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True, Mode=TwoWay}" 
-                ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                ScrollViewer.VerticalScrollBarVisibility="Visible"
-                EnableColumnVirtualization="True"
-                EnableRowVirtualization="True"
-                HorizontalGridLinesBrush="LightGray"
-                GridLinesVisibility="Horizontal"
-                RowHeight="26" 
-                Margin="12" 
-                Style="{DynamicResource DataGridStyle1}"
-                AutoGenerateColumns="False">
+        <DataGrid 
+            Grid.Column="1" Grid.Row="1" x:Name="SubscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True, Mode=TwoWay}" 
+            AddingNewItem="SubscribersDataGrid_OnAddingNewItem"
+            ScrollViewer.HorizontalScrollBarVisibility="Visible"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            EnableColumnVirtualization="True"
+            EnableRowVirtualization="True"
+            HorizontalGridLinesBrush="LightGray"
+            GridLinesVisibility="Horizontal"
+            RowHeight="26" 
+            Margin="12" 
+            Style="{DynamicResource DataGridStyle1}"
+            AutoGenerateColumns="False">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
             </DataGrid.Resources>
@@ -87,6 +89,13 @@
                 <DataGridTextColumn Width="100" Header="Cancelled On" Binding="{Binding SubscriptionCancelledOn}"></DataGridTextColumn>
                 <DataGridTextColumn Width="200" Header="Cancellation Reason" Binding="{Binding CancellationReason}"></DataGridTextColumn>
                 <DataGridTextColumn Width="200" Header="Is Paid" Binding="{Binding IsPaid}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Delete" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="x" Margin="0" Padding="0" Click="DeleteButton_OnClick"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

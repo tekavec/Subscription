@@ -95,7 +95,13 @@ namespace Subscription.ViewModels
             
             previousSelectedMonth = SelectedMonth;
             previousSelectedYear = SelectedYear;
+
             isDirty = false;
+        }
+
+        public void MakeDirty()
+        {
+            isDirty = true;
         }
     }
 }

@@ -146,5 +146,13 @@ namespace Subscription.Domain
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void BeginEdit()
+        {
+        }
+
+        public void CancelEdit()
+        {
+        }
     }
 }
