@@ -77,18 +77,18 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="150" Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
-                <DataGridTextColumn Width="150" Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Width="150" Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
                 <DataGridTextColumn Width="75" Header="PostCode" Binding="{Binding PostCode}"></DataGridTextColumn>
                 <DataGridTextColumn Width="150" Header="PostName" Binding="{Binding PostName}"></DataGridTextColumn>
                 <DataGridTextColumn Width="150" Header="Country" Binding="{Binding Country}"></DataGridTextColumn>
-                <DataGridTextColumn Width="150" Header="Subscription Type" Binding="{Binding SubscriptionType}"></DataGridTextColumn>
-                <DataGridTextColumn Width="150" Header="Business Type" Binding="{Binding BusinessType}"></DataGridTextColumn>
+                <DataGridTextColumn Width="120" Header="Subscription Type" Binding="{Binding SubscriptionType}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Business Type" Binding="{Binding BusinessType}"></DataGridTextColumn>
                 <DataGridTextColumn Width="75" Header="Copies" Binding="{Binding SubscriptionCopies}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Cancelled On" Binding="{Binding SubscriptionCancelledOn}"></DataGridTextColumn>
-                <DataGridTextColumn Width="200" Header="Cancellation Reason" Binding="{Binding CancellationReason}"></DataGridTextColumn>
-                <DataGridTextColumn Width="200" Header="Is Paid" Binding="{Binding IsPaid}"></DataGridTextColumn>
+                <DataGridTextColumn Width="150" Header="Cancellation Reason" Binding="{Binding CancellationReason}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Width="75" Header="Is Paid" Binding="{Binding IsPaid}"></DataGridCheckBoxColumn>
                 <DataGridTemplateColumn Header="Delete" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

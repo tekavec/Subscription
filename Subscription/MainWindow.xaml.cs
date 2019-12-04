@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using Subscription.Dialogs;
 using Subscription.Domain;
@@ -12,6 +13,7 @@ namespace Subscription
         public MainWindow()
         {
             InitializeComponent();
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             model = new MainWindowModel(new Clock());
             DataContext = model;
         }

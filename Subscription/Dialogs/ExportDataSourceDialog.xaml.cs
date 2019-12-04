@@ -15,8 +15,8 @@ namespace Subscription.Dialogs
 
         public ExportDataSourceDialog(YearAndMonth from, Func<ExportParams, Exceptional<Unit>> mergeAndExport)
         {
-            this.mergeAndExport = mergeAndExport;
             InitializeComponent();
+            this.mergeAndExport = mergeAndExport;
             model = new ExportDataSourceModel(from);
             DataContext = model;
         }
@@ -48,7 +48,13 @@ namespace Subscription.Dialogs
                     model.CloneRowsForMultipleCopies, 
                     model.MergeFilePath,
                     saveFileDialog.FileName);
-                mergeAndExport(exportParams);
+                if (mergeAndExport(exportParams).Success)
+                    MessageBox.Show(
+                        this, 
+                        "Export to file was successful.", 
+                        "Information", 
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
             }
         }
     }

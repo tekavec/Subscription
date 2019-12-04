@@ -55,35 +55,88 @@ namespace Subscription.Domain
         {
             try
             {
-                var subscriberExports = Enumerable.Empty<SubscriberExport>();
+                var internalSubscribersWithCopies = new List<SubscriberExport>();
+                var externalSubscribers = Array.Empty<SubscriberImport>();
                 if (!string.IsNullOrEmpty(exportParams.MergeFile))
                 {
                     if (File.Exists(exportParams.MergeFile))
                     {
-                        using var reader = new StreamReader(exportParams.MergeFile, Encoding.UTF8);
-                        using var csvReader = new CsvReader(reader, GetCsvConfiguration());
-                        subscriberExports = csvReader.GetRecords<SubscriberExport>();
+                        using (var reader = new StreamReader(exportParams.MergeFile, Encoding.UTF8))
+                        {
+                            reader.ReadLine();
+                            using (var csvReader = new CsvReader(reader, GetImportCsvConfiguration()))
+                            {
+                                externalSubscribers = csvReader.GetRecords<SubscriberImport>().ToArray();
+                            }
+
+                        }
                     }
 
                 }
 
                 var internalSubscribers = GetAll(exportParams.FromYearAndMonth);
-                var internalSubscribersExport = internalSubscribers
-                    .Where(a => a.IsPaid)
-                    .Select(a =>
-                        new SubscriberExport(
-                            a.FirstName,
-                            a.LastName,
-                            a.Address,
-                            a.PostCode,
-                            a.PostName,
-                            a.Country));
-                internalSubscribersExport.ForEach(a => subscriberExports.Append(a));
 
+                if (exportParams.CloneRowsForMultipleCopies)
+                {
+                    foreach (var internalSubscriber in internalSubscribers.Where(a => a.IsPaid))
+                    {
+                        for (var i = 0; i < internalSubscriber.SubscriptionCopies; i++)
+                        {
+                            var subscriberExport = new SubscriberExport(
+                                internalSubscriber.LastName,
+                                internalSubscriber.FirstName,
+                                internalSubscriber.Address,
+                                internalSubscriber.PostCode,
+                                internalSubscriber.PostName,
+                                internalSubscriber.Country);
+                            internalSubscribersWithCopies.Add(subscriberExport);
+                        }
+                    }
+                }
+                else
+                {
+                    internalSubscribersWithCopies = internalSubscribers
+                        .Where(a => a.IsPaid)
+                        .Select(a =>
+                            new SubscriberExport(
+                                a.LastName,
+                                a.FirstName,
+                                a.Address,
+                                a.PostCode,
+                                a.PostName,
+                                a.Country))
+                        .ToList();
+                    
+                }
+
+                var subscribersToExportLength = internalSubscribersWithCopies.Count + externalSubscribers.Count();
+
+                var subscribersToExport = new SubscriberExport[subscribersToExportLength];
+                for (var i = 0; i < internalSubscribersWithCopies.Count; i++)
+                {
+                    subscribersToExport[i] = internalSubscribersWithCopies[i];
+                }
+
+                var externalCount = 0;
+                externalSubscribers.ForEach(subscriber =>
+                {
+                    var subscriberExport = new SubscriberExport(
+                        subscriber.LastName,
+                        subscriber.FirstName,
+                        subscriber.Address,
+                        subscriber.PostCode,
+                        subscriber.PostName,
+                        subscriber.Country);
+                    subscribersToExport[internalSubscribersWithCopies.Count + externalCount++] = subscriberExport;
+                });
 
                 var wb = new XLWorkbook();
-                var ws = wb.Worksheets.Add("Lovec");
-                ws.Cell(1, 1).Value = internalSubscribersExport.AsEnumerable();
+                var ws = wb.Worksheets.Add("Subscription");
+                ws.Cell(1, 1).InsertTable(subscribersToExport
+                    .OrderBy(a => a.Country)
+                    .ThenBy(a => a.PostCode)
+                    .ThenBy(a => a.LastName)
+                    .AsEnumerable());
                 wb.SaveAs(exportParams.ExportFile);
             }
             catch (Exception ex)
@@ -118,6 +171,15 @@ namespace Subscription.Domain
             new CsvHelper.Configuration.Configuration
             {
                 Delimiter = ConfigurationManager.AppSettings["DataSourceDelimiter"]
+            };
+
+        private static CsvHelper.Configuration.Configuration GetImportCsvConfiguration() =>
+            new CsvHelper.Configuration.Configuration
+            {
+                Delimiter = ConfigurationManager.AppSettings["DataSourceDelimiter"],
+                HasHeaderRecord = false,
+                IgnoreBlankLines = true,
+                Encoding = Encoding.GetEncoding(1250)
             };
 
         private static string GetFilePath(YearAndMonth yearAndMonth)
