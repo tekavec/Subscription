@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.com/wpf"
         xmlns:local="clr-namespace:Subscription"
         mc:Ignorable="d"
-        Title="Subscription" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
+        Title="Subscription" 
+        Height="800" 
+        Width="1200" 
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <!-- DataGrid style -->
@@ -43,9 +47,24 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
             <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
-                <Button Margin="12,6" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">Save</Button>
-                <Button Margin="12,6" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">Create new data source</Button>
-                <Button Margin="12,6" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">Export data source</Button>
+                <Button Padding="12,6" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
+                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
+                        <fa:Icon FaName="save" Padding="0,6,6,0"/>
+                        Save
+                    </TextBlock>
+                </Button>
+                <Button Padding="12,6" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
+                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
+                        <fa:Icon FaName="file" Padding="0,6,6,0"/>
+                        Create new data source
+                    </TextBlock>
+                </Button>
+                <Button Padding="12,6" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">
+                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
+                        <fa:Icon FaName="file-export" Padding="0,6,6,0"/>
+                        Export data source
+                    </TextBlock>
+                </Button>
             </ToolBar>
         <StackPanel Grid.Column="0" Grid.Row="1" >
             <Label Margin="12" FontWeight="Bold">Select year and month:</Label>
