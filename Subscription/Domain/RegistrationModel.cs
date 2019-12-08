@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Subscription.Dialogs
+﻿namespace Subscription.Domain
 {
     public class RegistrationModel
     {

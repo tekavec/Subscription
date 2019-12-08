@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Subscription.Dialogs"
+        xmlns:p = "clr-namespace:Subscription.Properties"
         mc:Ignorable="d"
-        Title="Create Data Source" Height="320" Width="500" WindowStartupLocation="CenterScreen">
+        Title="{x:Static p:Resources.NewDataSource}" Height="320" Width="500" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Padding" Value="4"/>
@@ -25,11 +26,11 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="12">
-            <Label>Please select year and month you want to copy data from and to.</Label>
+            <Label Content="{x:Static p:Resources.NewDataSourceManual}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <StackPanel Margin="12">
-                <Label>Copy from:</Label>
+                <Label Content="{x:Static p:Resources.CopyFrom}" />
                 <ComboBox  x:Name="FromYearsComboBox" ItemsSource="{Binding FromYears}" SelectedItem="{Binding SelectedFromYear}" Margin="12" />
                 <ComboBox  x:Name="FromMonthsComboBox" ItemsSource="{Binding FromMonths}" SelectedItem="{Binding SelectedFromMonth}" Margin="12" />
             </StackPanel>
@@ -37,14 +38,14 @@
                 <Label FontSize="42" Margin="12,0,12,24"  Foreground="#FFCBCBCB">></Label>
             </StackPanel>
             <StackPanel Margin="12">
-                <Label>To:</Label>
+                <Label Content="{x:Static p:Resources.CopyTo}" />
                 <ComboBox  x:Name="ToYearsComboBox" ItemsSource="{Binding ToYears}" SelectedItem="{Binding SelectedToYear}" Margin="12" />
                 <ComboBox  x:Name="ToMonthsComboBox" ItemsSource="{Binding ToMonths}" SelectedItem="{Binding SelectedToMonth}" Margin="12" />
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="CreateNewMonthlySubscriptionButton" Margin="12" Click="CreateNewMonthlySubscriptionButton_OnClick">Create new</Button>
-            <Button x:Name="CancelButton" Margin="12" Click="CancelButton_OnClick">Cancel</Button>
+            <Button x:Name="CreateNewMonthlySubscriptionButton" Margin="12" Click="CreateNewMonthlySubscriptionButton_OnClick"  Content="{x:Static p:Resources.OK}" />
+            <Button x:Name="CancelButton" Margin="12" Click="CancelButton_OnClick" Content="{x:Static p:Resources.Cancel}" />
         </StackPanel>
     </Grid>
 </Window>

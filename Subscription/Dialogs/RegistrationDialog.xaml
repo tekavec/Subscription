@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Subscription.Dialogs"
+        xmlns:p = "clr-namespace:Subscription.Properties"
         mc:Ignorable="d"
-        Title="Registration" Height="300" Width="450" WindowStartupLocation="CenterScreen">
+        Title="{x:Static p:Resources.Registration}" Height="300" Width="450" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Padding" Value="4"/>
@@ -29,10 +30,10 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" FocusManager.FocusedElement="{Binding ElementName=PinPasswordBox}">
-            <Label HorizontalAlignment="Left" FontWeight="Normal" Margin="12">PIN requirements: min 4 characters, max 12 characters.</Label>
+            <Label HorizontalAlignment="Left" FontWeight="Normal" Margin="12" Content="{x:Static p:Resources.RegistrationManual}" />
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" FocusManager.FocusedElement="{Binding ElementName=PinPasswordBox}">
-            <Label HorizontalAlignment="Left" Width="90" Margin="12">Your PIN:</Label>
+            <Label HorizontalAlignment="Left" Width="90" Margin="12" Content="{x:Static p:Resources.YourPin}" />
             <PasswordBox
                  x:Name="PinPasswordBox" 
                  VerticalAlignment="Center"
@@ -42,7 +43,7 @@
             </PasswordBox>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" >
-            <Label HorizontalAlignment="Left" Width="90" Margin="12">Repeat PIN:</Label>
+            <Label HorizontalAlignment="Left" Width="90" Margin="12" Content="{x:Static p:Resources.RepeatPin}" />
             <PasswordBox 
                 VerticalAlignment="Center"
                 MaxLength="12"
@@ -52,8 +53,8 @@
             </PasswordBox>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="OkButton" Margin="12" Click="OkButton_OnClick">OK</Button>
-            <Button x:Name="CancelButton" Margin="12" Click="CancelButton_OnClick">Cancel</Button>
+            <Button x:Name="OkButton" Margin="12" Click="OkButton_OnClick" Content="{x:Static p:Resources.OK}" />
+            <Button x:Name="CancelButton" Margin="12" Click="CancelButton_OnClick" Content="{x:Static p:Resources.Cancel}" />
         </StackPanel>
     </Grid>
 </Window>

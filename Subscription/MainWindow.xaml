@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.com/wpf"
         xmlns:local="clr-namespace:Subscription"
+        xmlns:p = "clr-namespace:Subscription.Properties"
         mc:Ignorable="d"
-        Title="Subscription" 
+        Title="{x:Static p:Resources.AppName}" 
         Height="800" 
         Width="1200" 
         WindowStartupLocation="CenterScreen"
-        Closing="MainWindow_OnClosing">
+        Closing="MainWindow_OnClosing"
+        xml:lang="sl-SI">
 
     <Window.Resources>
         <!-- DataGrid style -->
@@ -23,8 +25,9 @@
             <Setter Property="Height" Value="36"/>
             <Setter Property="Background" Value="Black"/>
             <Setter Property="Foreground" Value="LightGray"/>
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="13" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="6,0,0,0" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="ToolTip" Value="Click to sort."/>
@@ -36,7 +39,7 @@
         </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Padding" Value="5"/>
-            <Setter Property="Height" Value="36"/>
+            <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -49,27 +52,27 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
             <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
-                <Button Padding="12,6" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
+                <Button Padding="12,0" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
                     <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="save" Padding="0,6,4,0" Margin="0,0,0,-2"/>
-                        Save
+                        <fa:Icon FaName="save" Padding="6" Margin="0,2,0,-4" />
+                        <Label Content="{x:Static p:Resources.Save}"></Label>
+                </TextBlock>
+                </Button>
+                <Button Padding="12,0" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
+                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
+                        <fa:Icon FaName="file" Padding="6" Margin="0,2,0,-4" />
+                        <Label Content="{x:Static p:Resources.NewDataSource}"></Label>
                     </TextBlock>
                 </Button>
-                <Button Padding="12,6" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
-                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="file" Padding="0,6,4,0" Margin="0,0,0,-2"/>
-                        New data source
-                    </TextBlock>
-                </Button>
-                <Button Padding="12,6" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">
-                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="file-export" Padding="0,6,4,0" Margin="0,0,0,-2"/>
-                        Export data source
+                <Button Padding="12,0" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">
+                    <TextBlock VerticalAlignment="Center" FontSize="13">
+                        <fa:Icon FaName="file-export" Padding="6" Margin="0,2,0,-4" />
+                        <Label Content="{x:Static p:Resources.ExportDataSource}"></Label>
                     </TextBlock>
                 </Button>
             </ToolBar>
         <StackPanel Grid.Column="0" Grid.Row="1" >
-            <Label Margin="12,12,0,0" FontWeight="Bold">Select year and month:</Label>
+            <Label Margin="12,12,0,0" FontWeight="Bold" Content="{x:Static p:Resources.SelectYearAndMonth}" />
             <ComboBox  x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Height="24" Margin="12">
             </ComboBox>
             <ListBox x:Name="MonthsListBox" 
@@ -79,15 +82,15 @@
                      SelectionChanged="MonthsListBox_OnSelectionChanged"
                      Margin= "12,0,12,24" />
             <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12">
-                <TextBlock VerticalAlignment="Bottom">
-                    <fa:Icon FaName="file" Padding="0,6,4,0" Margin="0,3,0,0"/>
-                    New data source
+                <TextBlock VerticalAlignment="Center">
+                    <fa:Icon FaName="file" Padding="4" Margin="0,3,0,0"/>
+                    <Label Content="{x:Static p:Resources.NewDataSource}"></Label>
                 </TextBlock>
             </Button>
             <Button x:Name="ExportDataSourceButton" Click="ExportDataSource_OnClick" Margin="12">
-                <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                    <fa:Icon FaName="file-export" Padding="0,6,4,0" Margin="0,3,0,0"/>
-                    Export data source
+                <TextBlock VerticalAlignment="Center">
+                    <fa:Icon FaName="file-export" Padding="4" Margin="0,3,0,0"/>
+                    <Label Content="{x:Static p:Resources.ExportDataSource}"></Label>
                 </TextBlock>
             </Button>
         </StackPanel>
@@ -102,7 +105,7 @@
             EnableRowVirtualization="True"
             HorizontalGridLinesBrush="LightGray"
             GridLinesVisibility="Horizontal"
-            RowHeight="26" 
+            RowHeight="32" 
             Margin="12" 
             Style="{DynamicResource DataGridStyle1}"
             AutoGenerateColumns="False">
@@ -110,19 +113,19 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="FirstNameColumn" Width="100" Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
-                <DataGridTextColumn Width="150" Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
-                <DataGridTextColumn Width="75" Header="PostCode" Binding="{Binding PostCode}"></DataGridTextColumn>
-                <DataGridTextColumn Width="150" Header="PostName" Binding="{Binding PostName}"></DataGridTextColumn>
-                <DataGridTextColumn Width="150" Header="Country" Binding="{Binding Country}"></DataGridTextColumn>
-                <DataGridTextColumn Width="120" Header="Subscription Type" Binding="{Binding SubscriptionType}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Business Type" Binding="{Binding BusinessType}"></DataGridTextColumn>
-                <DataGridTextColumn Width="75" Header="Copies" Binding="{Binding SubscriptionCopies}"></DataGridTextColumn>
-                <DataGridCheckBoxColumn Width="75" Header="Is Paid" Binding="{Binding IsPaid}"></DataGridCheckBoxColumn>
-                <DataGridTextColumn Width="100" Header="Cancelled On" Binding="{Binding SubscriptionCancelledOn}"></DataGridTextColumn>
-                <DataGridTextColumn x:Name="CancellationReasonColumn" Width="150" Header="Cancellation Reason" Binding="{Binding CancellationReason}"></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Delete" Width="50">
+                <DataGridTextColumn x:Name="FirstNameColumn" Width="100" Header="{x:Static p:Resources.FirstName}" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.LastName}" Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="150" Header="{x:Static p:Resources.Address}" Binding="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="75" Header="{x:Static p:Resources.PostCode}" Binding="{Binding PostCode, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="150" Header="{x:Static p:Resources.PostName}" Binding="{Binding PostName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="150" Header="{x:Static p:Resources.Country}" Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="120" Header="{x:Static p:Resources.SubscriptionType}" Binding="{Binding SubscriptionType, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.BusinessType}" Binding="{Binding BusinessType, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="75" Header="{x:Static p:Resources.SubscriptionCopies}" Binding="{Binding SubscriptionCopies, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridCheckBoxColumn Width="75" Header="{x:Static p:Resources.IsPaid}" Binding="{Binding IsPaid, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.SubscriptionCancelledOn}" Binding="{Binding SubscriptionCancelledOn, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn x:Name="CancellationReasonColumn" Width="150" Header="{x:Static p:Resources.CancellationReason}" Binding="{Binding CancellationReason, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTemplateColumn Header="{x:Static p:Resources.Delete}" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="x" VerticalAlignment="Center" Margin="2" Padding="0" Click="DeleteButton_OnClick"/>
