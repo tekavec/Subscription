@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using Subscription.Dialogs;
@@ -64,6 +65,10 @@ namespace Subscription
 
         private void Save()
         {
+            DataGridCellInfo lastCell = new DataGridCellInfo(SubscribersDataGrid.SelectedItem, this.CancellationReasonColumn);
+            DataGridCellInfo firstCell = new DataGridCellInfo(SubscribersDataGrid.SelectedItem, this.FirstNameColumn);
+            this.SubscribersDataGrid.CurrentCell = lastCell;
+            this.SubscribersDataGrid.CurrentCell = firstCell;
             model.SaveDataSource();
         }
 
@@ -92,6 +97,16 @@ namespace Subscription
                     model.MakeDirty();
                 }
             }
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            Save();
+        }
+
+        private void SubscribersDataGrid_OnPreparingCellForEdit(object sender, DataGridPreparingCellForEditEventArgs e)
+        {
+            model.MakeDirty();
         }
     }
 }

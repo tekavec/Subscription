@@ -9,7 +9,8 @@
         Title="Subscription" 
         Height="800" 
         Width="1200" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Closing="MainWindow_OnClosing">
 
     <Window.Resources>
         <!-- DataGrid style -->
@@ -91,8 +92,10 @@
             </Button>
         </StackPanel>
         <DataGrid 
-            Grid.Column="1" Grid.Row="1" x:Name="SubscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True, Mode=TwoWay}" 
+            Grid.Column="1" Grid.Row="1" x:Name="SubscribersDataGrid" 
+            ItemsSource="{Binding Subscribers, UpdateSourceTrigger=LostFocus, IsAsync=True, Mode=TwoWay}" 
             AddingNewItem="SubscribersDataGrid_OnAddingNewItem"
+            PreparingCellForEdit="SubscribersDataGrid_OnPreparingCellForEdit"
             ScrollViewer.HorizontalScrollBarVisibility="Visible"
             ScrollViewer.VerticalScrollBarVisibility="Visible"
             EnableColumnVirtualization="True"
@@ -107,7 +110,7 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="100" Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="FirstNameColumn" Width="100" Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Width="150" Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
                 <DataGridTextColumn Width="75" Header="PostCode" Binding="{Binding PostCode}"></DataGridTextColumn>
@@ -116,13 +119,13 @@
                 <DataGridTextColumn Width="120" Header="Subscription Type" Binding="{Binding SubscriptionType}"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Business Type" Binding="{Binding BusinessType}"></DataGridTextColumn>
                 <DataGridTextColumn Width="75" Header="Copies" Binding="{Binding SubscriptionCopies}"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Cancelled On" Binding="{Binding SubscriptionCancelledOn}"></DataGridTextColumn>
-                <DataGridTextColumn Width="150" Header="Cancellation Reason" Binding="{Binding CancellationReason}"></DataGridTextColumn>
                 <DataGridCheckBoxColumn Width="75" Header="Is Paid" Binding="{Binding IsPaid}"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Width="100" Header="Cancelled On" Binding="{Binding SubscriptionCancelledOn}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="CancellationReasonColumn" Width="150" Header="Cancellation Reason" Binding="{Binding CancellationReason}"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Delete" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="x" Margin="0" Padding="0" Click="DeleteButton_OnClick"/>
+                            <Button Content="x" VerticalAlignment="Center" Margin="2" Padding="0" Click="DeleteButton_OnClick"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
