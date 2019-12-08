@@ -19,12 +19,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Dialogs\RegistrationDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\LoginDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Dialogs\ExportDataSourceDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Dialogs\RegistrationDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\LoginDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Dialogs\ExportDataSourceDialog.xaml">
       <SubType>Designer</SubType>
     </Page>

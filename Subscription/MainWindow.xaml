@@ -35,6 +35,7 @@
         </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="Height" Value="36"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -49,35 +50,45 @@
             <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
                 <Button Padding="12,6" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
                     <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="save" Padding="0,6,6,0"/>
+                        <fa:Icon FaName="save" Padding="0,6,4,0" Margin="0,0,0,-2"/>
                         Save
                     </TextBlock>
                 </Button>
                 <Button Padding="12,6" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
                     <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="file" Padding="0,6,6,0"/>
-                        Create new data source
+                        <fa:Icon FaName="file" Padding="0,6,4,0" Margin="0,0,0,-2"/>
+                        New data source
                     </TextBlock>
                 </Button>
                 <Button Padding="12,6" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">
                     <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="file-export" Padding="0,6,6,0"/>
+                        <fa:Icon FaName="file-export" Padding="0,6,4,0" Margin="0,0,0,-2"/>
                         Export data source
                     </TextBlock>
                 </Button>
             </ToolBar>
         <StackPanel Grid.Column="0" Grid.Row="1" >
-            <Label Margin="12" FontWeight="Bold">Select year and month:</Label>
-            <ComboBox  x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Margin="12">
+            <Label Margin="12,12,0,0" FontWeight="Bold">Select year and month:</Label>
+            <ComboBox  x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Height="24" Margin="12">
             </ComboBox>
             <ListBox x:Name="MonthsListBox" 
                      ItemsSource="{Binding Months}" 
                      SelectedItem="{Binding SelectedMonth}" 
                      SelectionMode="Single"
                      SelectionChanged="MonthsListBox_OnSelectionChanged"
-                     Margin= "12" />
-            <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12">Create new data source</Button>
-            <Button x:Name="ExportDataSourceButton" Click="ExportDataSource_OnClick" Margin="12">Export data source</Button>
+                     Margin= "12,0,12,24" />
+            <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12">
+                <TextBlock VerticalAlignment="Bottom">
+                    <fa:Icon FaName="file" Padding="0,6,4,0" Margin="0,3,0,0"/>
+                    New data source
+                </TextBlock>
+            </Button>
+            <Button x:Name="ExportDataSourceButton" Click="ExportDataSource_OnClick" Margin="12">
+                <TextBlock VerticalAlignment="Bottom" FontSize="13">
+                    <fa:Icon FaName="file-export" Padding="0,6,4,0" Margin="0,3,0,0"/>
+                    Export data source
+                </TextBlock>
+            </Button>
         </StackPanel>
         <DataGrid 
             Grid.Column="1" Grid.Row="1" x:Name="SubscribersDataGrid" ItemsSource="{Binding Subscribers, IsAsync=True, Mode=TwoWay}" 

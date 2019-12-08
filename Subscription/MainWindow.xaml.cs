@@ -14,6 +14,25 @@ namespace Subscription
         {
             InitializeComponent();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            if (UserRepository.IsUserRegistered())
+            {
+                var login = new LoginDialog();
+                var loginResult = login.ShowDialog();
+                if (loginResult == null || loginResult == false)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+            else
+            {
+                var registration = new RegistrationDialog();
+                var registrationResult = registration.ShowDialog();
+                if (registrationResult == null || registrationResult == false)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+
             model = new MainWindowModel(new Clock());
             DataContext = model;
         }

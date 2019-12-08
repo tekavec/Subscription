@@ -1,0 +1,38 @@
+﻿<Window x:Class="Subscription.Dialogs.LoginDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subscription.Dialogs"
+        mc:Ignorable="d"
+        Title="Login" Height="300" Width="450" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="#FFADA0BD" Offset="1"/>
+                <GradientStop Color="#FFE3E3E3" Offset="0"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" FocusManager.FocusedElement="{Binding ElementName=PinPasswordBox}">
+            <Label HorizontalAlignment="Center" Margin="0,12"  FontSize="20">PIN:</Label>
+            <PasswordBox 
+                x:Name="PinPasswordBox" 
+                Width="160" 
+                FontSize="20" 
+                HorizontalContentAlignment="Center" 
+                KeyDown="PinPasswordBox_OnKeyDown"></PasswordBox>
+        </StackPanel>
+    </Grid>
+</Window>

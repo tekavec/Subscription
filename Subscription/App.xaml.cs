@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Subscription.Dialogs;
+using Subscription.ViewModels;
 
 namespace Subscription
 {
@@ -13,5 +9,23 @@ namespace Subscription
     /// </summary>
     public partial class App : Application
     {
+//        private AppModel model;
+//        private void App_Startup(object sender, StartupEventArgs e)
+//        {
+//            model = new AppModel();
+//            if (model.IsUserRegistered())
+//            {
+//                var login = new LoginDialog();
+//                login.ShowDialog();
+//            }
+//            else
+//            {
+//                var registration = new RegistrationDialog();
+//                registration.ShowDialog();
+//            }
+//            
+//            var mainWindow = new MainWindow();
+//            mainWindow.Show();
+//        }
     }
 }
