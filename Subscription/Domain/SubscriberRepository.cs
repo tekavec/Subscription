@@ -61,7 +61,7 @@ namespace Subscription.Domain
                 {
                     if (File.Exists(exportParams.MergeFile))
                     {
-                        using (var reader = new StreamReader(exportParams.MergeFile, Encoding.UTF8))
+                        using (var reader = new StreamReader(exportParams.MergeFile, Encoding.GetEncoding(1250)))
                         {
                             reader.ReadLine();
                             using (var csvReader = new CsvReader(reader, GetImportCsvConfiguration()))
@@ -179,7 +179,7 @@ namespace Subscription.Domain
                 Delimiter = AppSettings.DataSourceDelimiter,
                 HasHeaderRecord = false,
                 IgnoreBlankLines = true,
-                Encoding = Encoding.GetEncoding(1250)
+                Encoding = Encoding.UTF8
             };
 
         private static string GetFilePath(YearAndMonth yearAndMonth)

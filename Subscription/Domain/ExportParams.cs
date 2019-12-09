@@ -14,7 +14,7 @@
             string exportFile = "")
         {
             FromYearAndMonth = fromYearAndMonth;
-            CloneRowsForMultipleCopies = cloneRowsForMultipleCopies;
+            CloneRowsForMultipleCopies = true;
             MergeFile = mergeFile;
             ExportFile = exportFile;
         }

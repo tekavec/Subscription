@@ -8,9 +8,7 @@
         xmlns:p = "clr-namespace:Subscription.Properties"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.AppName}" 
-        Height="800" 
-        Width="1200" 
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Closing="MainWindow_OnClosing"
         xml:lang="sl-SI">
 
@@ -113,8 +111,8 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="FirstNameColumn" Width="100" Header="{x:Static p:Resources.FirstName}" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.LastName}" Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn x:Name="FirstNameColumn" Width="180" Header="{x:Static p:Resources.FirstName}" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="180" Header="{x:Static p:Resources.LastName}" Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.Address}" Binding="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="75" Header="{x:Static p:Resources.PostCode}" Binding="{Binding PostCode, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.PostName}" Binding="{Binding PostName, UpdateSourceTrigger=PropertyChanged}" />
