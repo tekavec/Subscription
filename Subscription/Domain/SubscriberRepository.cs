@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using ClosedXML.Excel;
 using CsvHelper;
 using LaYumba.Functional;
+using static Subscription.Configuration.SettingManager;
 using static LaYumba.Functional.F;
 using Unit = System.ValueTuple;
 
@@ -32,7 +32,7 @@ namespace Subscription.Domain
         {
             try
             {
-                var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
+                var dataFolder = AppSettings.DataFolder;
                 var sourceFile = Path.Combine(dataFolder, $"{SubscribersPrefix}_{copyFilesParams.From.Year}_{copyFilesParams.From.Month.Number:00}{SubscribersExtension}");
                 if (!File.Exists(sourceFile))
                     return new FileNotFoundException("Source file not found.", sourceFile);
@@ -170,13 +170,13 @@ namespace Subscription.Domain
         private static CsvHelper.Configuration.Configuration GetCsvConfiguration() =>
             new CsvHelper.Configuration.Configuration
             {
-                Delimiter = ConfigurationManager.AppSettings["DataSourceDelimiter"]
+                Delimiter = AppSettings.DataSourceDelimiter
             };
 
         private static CsvHelper.Configuration.Configuration GetImportCsvConfiguration() =>
             new CsvHelper.Configuration.Configuration
             {
-                Delimiter = ConfigurationManager.AppSettings["DataSourceDelimiter"],
+                Delimiter = AppSettings.DataSourceDelimiter,
                 HasHeaderRecord = false,
                 IgnoreBlankLines = true,
                 Encoding = Encoding.GetEncoding(1250)
@@ -184,7 +184,7 @@ namespace Subscription.Domain
 
         private static string GetFilePath(YearAndMonth yearAndMonth)
         {
-            var dataFolder = ConfigurationManager.AppSettings["DataFolder"];
+            var dataFolder = AppSettings.DataFolder;
             return Path.Combine(dataFolder,
                 $"{SubscribersPrefix}_{yearAndMonth.Year}_{yearAndMonth.Month.Number:00}{SubscribersExtension}");
         }
