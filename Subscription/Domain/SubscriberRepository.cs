@@ -149,6 +149,8 @@ namespace Subscription.Domain
 
         public static Exceptional<Unit> Save(IEnumerable<Subscriber> subscribers, YearAndMonth yearAndMonth)
         {
+            if (AppSettings.IsReadonly) return Unit();
+
             try
             {
                 var file = GetFilePath(yearAndMonth);
