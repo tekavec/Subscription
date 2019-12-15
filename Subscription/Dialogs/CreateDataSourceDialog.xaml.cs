@@ -32,15 +32,19 @@ namespace Subscription.Dialogs
                     ex => MessageBox.Show(
                         this, 
                         ex.Message, 
-                        "Error", 
+                        Properties.Resources.Error, 
                         MessageBoxButton.OK, 
                         MessageBoxImage.Error),
-                    _ => MessageBox.Show(
-                        this, 
-                        "New data source creation was successful.", 
-                        "Information",
-                        MessageBoxButton.OK, 
-                        MessageBoxImage.Information));
+                    _ =>
+                    {
+                        MessageBox.Show(
+                            this,
+                            Properties.Resources.NewDataSourceCreateSuccess,
+                            Properties.Resources.Information,
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                        this.Close();
+                    });
         }
 
         private CopyFilesParams GetCopyFilesParams() =>

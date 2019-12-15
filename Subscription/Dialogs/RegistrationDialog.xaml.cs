@@ -45,8 +45,8 @@ namespace Subscription.Dialogs
         {
             MessageBox.Show(
                 this,
-                "Registration successful!",
-                "Information",
+                Properties.Resources.RegistrationSuccessful,
+                Properties.Resources.Information,
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
             this.DialogResult = true;
@@ -58,19 +58,19 @@ namespace Subscription.Dialogs
             MessageBox.Show(
                 this,
                 ex.Message,
-                "Error",
+                Properties.Resources.Error,
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }
 
         private void BadRegistration(IEnumerable<Error> errors)
         {
-            var errorMessages = new StringBuilder("Registration was not successful. Error(s) encountered: \n\n");
+            var errorMessages = new StringBuilder($"{Properties.Resources.RegistrationFailed} \n\n");
             errors.ForEach(error => errorMessages.AppendLine(error.Message));
             MessageBox.Show(
                 this, 
-                errorMessages.ToString(), 
-                "Error", 
+                errorMessages.ToString(),
+                Properties.Resources.Error, 
                 MessageBoxButton.OK, 
                 MessageBoxImage.Error);
         }

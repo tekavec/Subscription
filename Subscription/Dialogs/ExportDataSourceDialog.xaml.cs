@@ -51,8 +51,8 @@ namespace Subscription.Dialogs
                 if (mergeAndExport(exportParams).Success)
                     MessageBox.Show(
                         this, 
-                        "Export to file was successful.", 
-                        "Information", 
+                        Properties.Resources.ExportDataSourceSuccess, 
+                        Properties.Resources.Information, 
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
             }

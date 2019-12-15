@@ -160,6 +160,24 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete this row?.
+        /// </summary>
+        public static string DeleteConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string Export {
@@ -187,6 +205,15 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to file was successful..
+        /// </summary>
+        public static string ExportDataSourceSuccess {
+            get {
+                return ResourceManager.GetString("ExportDataSourceSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter:.
         /// </summary>
         public static string Filter {
@@ -201,6 +228,15 @@ namespace Subscription.Properties {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
             }
         }
         
@@ -232,11 +268,29 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login was not successful:.
+        /// </summary>
+        public static string LoginFailed {
+            get {
+                return ResourceManager.GetString("LoginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New data source.
         /// </summary>
         public static string NewDataSource {
             get {
                 return ResourceManager.GetString("NewDataSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New data source creation was successful..
+        /// </summary>
+        public static string NewDataSourceCreateSuccess {
+            get {
+                return ResourceManager.GetString("NewDataSourceCreateSuccess", resourceCulture);
             }
         }
         
@@ -286,6 +340,15 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Question.
+        /// </summary>
+        public static string Question {
+            get {
+                return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration.
         /// </summary>
         public static string Registration {
@@ -295,11 +358,29 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registration was not successful. Error(s) encountered:.
+        /// </summary>
+        public static string RegistrationFailed {
+            get {
+                return ResourceManager.GetString("RegistrationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PIN requirements: min 4 characters, max 12 characters..
         /// </summary>
         public static string RegistrationManual {
             get {
                 return ResourceManager.GetString("RegistrationManual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration was successful..
+        /// </summary>
+        public static string RegistrationSuccessful {
+            get {
+                return ResourceManager.GetString("RegistrationSuccessful", resourceCulture);
             }
         }
         

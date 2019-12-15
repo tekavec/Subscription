@@ -47,14 +47,16 @@ namespace Subscription
         private void CreateNewDataSource_OnClick(object sender, RoutedEventArgs e)
         {
             Save();
-            var createDataSource = new CreateDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.CopyDataSource);
+            var createDataSource = 
+                new CreateDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.CopyDataSource);
             createDataSource.ShowDialog();
         }
 
         private void ExportDataSource_OnClick(object sender, RoutedEventArgs e)
         {
             Save();
-            var exportDataSourceDialog = new ExportDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.ExportDataSource);
+            var exportDataSourceDialog = 
+                new ExportDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.ExportDataSource);
             exportDataSourceDialog.ShowDialog();
         }
 
@@ -85,8 +87,8 @@ namespace Subscription
         private void DeleteButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show(
-                    "Do you want to delete this row?",
-                    "Question",
+                    Properties.Resources.DeleteConfirmation,
+                    Properties.Resources.Question,
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {

@@ -37,12 +37,12 @@ namespace Subscription.Dialogs
 
         private void InvalidLogin(IEnumerable<Error> errors)
         {
-            var errorMessages = new StringBuilder("Login was not successful: ");
+            var errorMessages = new StringBuilder(Properties.Resources.LoginFailed);
             errors.ForEach(error => errorMessages.AppendLine(error.Message));
             MessageBox.Show(
                 this,
                 errorMessages.ToString(),
-                "Error",
+                Properties.Resources.Error,
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }

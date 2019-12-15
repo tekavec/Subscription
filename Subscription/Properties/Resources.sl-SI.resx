@@ -150,6 +150,12 @@
   <data name="Delete" xml:space="preserve">
     <value>Zbriši</value>
   </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>Ali želite zbrisati ta zapis?</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Napaka</value>
+  </data>
   <data name="Export" xml:space="preserve">
     <value>Izvozi</value>
   </data>
@@ -159,11 +165,17 @@
   <data name="ExportDataSourceManual" xml:space="preserve">
     <value>Določite nastavitve izvoza:</value>
   </data>
+  <data name="ExportDataSourceSuccess" xml:space="preserve">
+    <value>Izvoz podatkov je bilo uspešno izvedeno.</value>
+  </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter:</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Ime</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Obvestilo</value>
   </data>
   <data name="IsPaid" xml:space="preserve">
     <value>Plačano</value>
@@ -174,8 +186,14 @@
   <data name="Login" xml:space="preserve">
     <value>Prijava</value>
   </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Prijava ni uspela: </value>
+  </data>
   <data name="NewDataSource" xml:space="preserve">
     <value>Novo obdobje</value>
+  </data>
+  <data name="NewDataSourceCreateSuccess" xml:space="preserve">
+    <value>Kopiranje podatkov je bilo uspešno izvedeno.</value>
   </data>
   <data name="NewDataSourceManual" xml:space="preserve">
     <value>Izberite izvorni in ciljno leto in mesec.</value>
@@ -192,11 +210,20 @@
   <data name="PostName" xml:space="preserve">
     <value>Pošta</value>
   </data>
+  <data name="Question" xml:space="preserve">
+    <value>Vprašanje</value>
+  </data>
   <data name="Registration" xml:space="preserve">
     <value>Registracija</value>
   </data>
+  <data name="RegistrationFailed" xml:space="preserve">
+    <value>Registracija nibila uspešno izvedena. Opis napak:</value>
+  </data>
   <data name="RegistrationManual" xml:space="preserve">
     <value>PIN pravila: minimalno 4 znaki, maksimalno 12 znakov.</value>
+  </data>
+  <data name="RegistrationSuccessful" xml:space="preserve">
+    <value>Registracija je bila uspešno izvedena.</value>
   </data>
   <data name="RepeatPin" xml:space="preserve">
     <value>Ponovi PIN:</value>
