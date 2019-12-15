@@ -92,12 +92,14 @@ namespace Subscription
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                var subscriber = this.SubscribersDataGrid.SelectedItem;
+                var subscriber = SubscribersDataGrid.SelectedItem;
                 if (subscriber != null)
                 {
                     model.Subscribers.Remove((Subscriber) subscriber);
                     model.MakeDirty();
                 }
+
+                SubscribersDataGrid.Items.Refresh();
             }
         }
 
@@ -125,6 +127,11 @@ namespace Subscription
             var firstCell = new DataGridCellInfo(SubscribersDataGrid.SelectedItem, this.FirstNameColumn);
             SubscribersDataGrid.CurrentCell = firstCell;
             SubscribersDataGrid.BeginEdit();
+        }
+
+        private void SubscribersDataGrid_OnLoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
     }
 }

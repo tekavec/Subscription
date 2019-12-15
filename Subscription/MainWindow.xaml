@@ -25,7 +25,7 @@
             <Setter Property="Foreground" Value="LightGray"/>
             <Setter Property="FontSize" Value="13" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Padding" Value="6,0,0,0" />
+            <Setter Property="Padding" Value="8,0,0,0" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="ToolTip" Value="Click to sort."/>
@@ -37,7 +37,6 @@
         </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Padding" Value="5"/>
-            <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -79,7 +78,7 @@
             </Button>
         </ToolBar>
         <StackPanel Grid.Column="0" Grid.Row="1" Background="Beige" >
-            <Label Margin="6" FontWeight="Bold" FontSize="18" Content="{x:Static p:Resources.YearAndMonth}" />
+            <Label Margin="12,12,0,0" FontWeight="Bold" FontSize="20" Content="{x:Static p:Resources.YearAndMonth}" />
         </StackPanel>
         <Grid Grid.Column="1" Grid.Row="1" Background="Beige">
             <Grid.ColumnDefinitions>
@@ -87,7 +86,7 @@
                 <ColumnDefinition Width="350" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Margin="6" FontWeight="Bold" FontSize="18"  Content="{x:Static p:Resources.AppName}" />
+            <Label Grid.Column="0" Margin="12,12,0,0" FontWeight="Bold" FontSize="20"  Content="{x:Static p:Resources.AppName}" />
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label FontWeight="Bold" Margin="12" Content="{x:Static p:Resources.Filter}" />
                 <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}" Margin="0,12" VerticalContentAlignment="Center" MinWidth="100" HorizontalAlignment="Stretch" />
@@ -109,13 +108,13 @@
                      SelectionMode="Single"
                      SelectionChanged="MonthsListBox_OnSelectionChanged"
                      Margin= "12,0,12,24" />
-            <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12">
+            <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12" Height="40">
                 <TextBlock VerticalAlignment="Center">
                     <fa:Icon FaName="copy" Padding="4" Margin="0,3,0,0"/>
                     <Label Content="{x:Static p:Resources.NewDataSource}"></Label>
                 </TextBlock>
             </Button>
-            <Button x:Name="ExportDataSourceButton" Click="ExportDataSource_OnClick" Margin="12">
+            <Button x:Name="ExportDataSourceButton" Click="ExportDataSource_OnClick" Margin="12" Height="40">
                 <TextBlock VerticalAlignment="Center">
                     <fa:Icon FaName="file-export" Padding="4" Margin="0,3,0,0"/>
                     <Label Content="{x:Static p:Resources.ExportDataSource}"></Label>
@@ -127,13 +126,14 @@
             ItemsSource="{Binding Subscribers, UpdateSourceTrigger=LostFocus, IsAsync=True, Mode=TwoWay}" 
             AddingNewItem="SubscribersDataGrid_OnAddingNewItem"
             PreparingCellForEdit="SubscribersDataGrid_OnPreparingCellForEdit"
+            LoadingRow="SubscribersDataGrid_OnLoadingRow"
             ScrollViewer.HorizontalScrollBarVisibility="Visible"
             ScrollViewer.VerticalScrollBarVisibility="Visible"
             EnableColumnVirtualization="True"
             EnableRowVirtualization="True"
             HorizontalGridLinesBrush="LightGray"
             GridLinesVisibility="Horizontal"
-            RowHeight="32" 
+            SelectionMode="Single"
             Margin="12" 
             Style="{DynamicResource DataGridStyle1}"
             AutoGenerateColumns="False">
@@ -156,11 +156,24 @@
                 <DataGridTemplateColumn Header="{x:Static p:Resources.Delete}" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="x" VerticalAlignment="Center" Margin="2" Padding="0" Click="DeleteButton_OnClick"/>
+                            <Button VerticalAlignment="Center" Margin="0" Padding="2"  Width="40" Click="DeleteButton_OnClick">
+                                <TextBlock>
+                                    <fa:Icon FaName="times-circle" Height="12" />
+                                </TextBlock>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="3"  Orientation="Horizontal" Margin="12,0">
+            <Label Content="{x:Static p:Resources.RecordCount}" Padding="2,0"></Label>
+            <Label Content="{x:Static p:Resources.ForTerm}" Padding="2,0"></Label>
+            <Label Content="{Binding ElementName=MonthsListBox, Path=SelectedItem}" Padding="2,0"></Label>
+            <Label Content="/" Padding="0"></Label>
+            <Label Content="{Binding ElementName=YearsComboBox, Path=SelectedItem}" Padding="2,0"></Label>
+            <Label Content=":" Padding="0"></Label>
+            <Label Content="{Binding ElementName=SubscribersDataGrid, Path=Items.Count}"  FontWeight="Bold" Padding="6,0"></Label>
+        </StackPanel>
     </Grid>
 </Window>

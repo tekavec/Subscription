@@ -232,6 +232,15 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to for term.
+        /// </summary>
+        public static string ForTerm {
+            get {
+                return ResourceManager.GetString("ForTerm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string Information {
@@ -345,6 +354,15 @@ namespace Subscription.Properties {
         public static string Question {
             get {
                 return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records.
+        /// </summary>
+        public static string RecordCount {
+            get {
+                return ResourceManager.GetString("RecordCount", resourceCulture);
             }
         }
         
