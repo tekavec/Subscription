@@ -53,26 +53,27 @@
         </Grid.RowDefinitions>
         <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
             <Button Padding="12,0" x:Name="NewSubscriberToolbarButton" Click="NewSubscriber_OnClick">
-                <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="file" Padding="6" Margin="0,2,0,-4" />
-                        <Label Content="{x:Static p:Resources.NewSubscriber}"></Label>
+                <TextBlock VerticalAlignment="Bottom" >
+                    <fa:Icon FaName="file" Padding="9" Margin="0,2,-8,-4" />
+                    <Label Content="{x:Static p:Resources.NewSubscriber}"></Label>
                 </TextBlock>
             </Button>
             <Button Padding="12,0" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
-                <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="save" Padding="6" Margin="0,2,0,-4" />
+                <TextBlock VerticalAlignment="Bottom">
+                        <fa:Icon FaName="save" Padding="9" Margin="0,2,-8,-4" />
                         <Label Content="{x:Static p:Resources.Save}"></Label>
                 </TextBlock>
             </Button>
+            <Separator Margin="4" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
             <Button Padding="12,0" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
-                <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="copy" Padding="6" Margin="0,2,0,-4" />
+                <TextBlock VerticalAlignment="Bottom">
+                        <fa:Icon FaName="copy" Padding="9" Margin="0,2,-8,-4" />
                         <Label Content="{x:Static p:Resources.NewDataSource}"></Label>
                 </TextBlock>
             </Button>
             <Button Padding="12,0" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">
-                <TextBlock VerticalAlignment="Center" FontSize="13">
-                        <fa:Icon FaName="file-export" Padding="6" Margin="0,2,0,-4" />
+                <TextBlock VerticalAlignment="Center">
+                        <fa:Icon FaName="file-export" Padding="9" Margin="0,2,-8,-4" />
                         <Label Content="{x:Static p:Resources.ExportDataSource}"></Label>
                 </TextBlock>
             </Button>
