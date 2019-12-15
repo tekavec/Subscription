@@ -52,6 +52,12 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Padding="12,0" x:Name="NewSubscriberToolbarButton" Click="NewSubscriber_OnClick">
+                <TextBlock VerticalAlignment="Bottom" FontSize="13">
+                        <fa:Icon FaName="file" Padding="6" Margin="0,2,0,-4" />
+                        <Label Content="{x:Static p:Resources.NewSubscriber}"></Label>
+                </TextBlock>
+            </Button>
             <Button Padding="12,0" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
                 <TextBlock VerticalAlignment="Bottom" FontSize="13">
                         <fa:Icon FaName="save" Padding="6" Margin="0,2,0,-4" />
@@ -60,7 +66,7 @@
             </Button>
             <Button Padding="12,0" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
                 <TextBlock VerticalAlignment="Bottom" FontSize="13">
-                        <fa:Icon FaName="file" Padding="6" Margin="0,2,0,-4" />
+                        <fa:Icon FaName="copy" Padding="6" Margin="0,2,0,-4" />
                         <Label Content="{x:Static p:Resources.NewDataSource}"></Label>
                 </TextBlock>
             </Button>
@@ -104,7 +110,7 @@
                      Margin= "12,0,12,24" />
             <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12">
                 <TextBlock VerticalAlignment="Center">
-                    <fa:Icon FaName="file" Padding="4" Margin="0,3,0,0"/>
+                    <fa:Icon FaName="copy" Padding="4" Margin="0,3,0,0"/>
                     <Label Content="{x:Static p:Resources.NewDataSource}"></Label>
                 </TextBlock>
             </Button>

@@ -180,6 +180,9 @@
   <data name="NewDataSourceManual" xml:space="preserve">
     <value>Please select year and month you want to copy data from and to.</value>
   </data>
+  <data name="NewSubscriber" xml:space="preserve">
+    <value>New subscriber</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>

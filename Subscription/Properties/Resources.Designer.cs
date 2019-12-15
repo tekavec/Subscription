@@ -250,6 +250,15 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New subscriber.
+        /// </summary>
+        public static string NewSubscriber {
+            get {
+                return ResourceManager.GetString("NewSubscriber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {

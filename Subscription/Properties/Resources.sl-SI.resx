@@ -180,6 +180,9 @@
   <data name="NewDataSourceManual" xml:space="preserve">
     <value>Izberite izvorni in ciljno leto in mesec.</value>
   </data>
+  <data name="NewSubscriber" xml:space="preserve">
+    <value>Nov naročnik</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>V redu</value>
   </data>

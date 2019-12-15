@@ -113,5 +113,16 @@ namespace Subscription
         {
             model.FilterString = string.Empty;
         }
+
+        private void NewSubscriber_OnClick(object sender, RoutedEventArgs e)
+        {
+            SubscribersDataGrid.SelectedIndex = SubscribersDataGrid.Items.Count-1;
+            SubscribersDataGrid.ScrollIntoView(SubscribersDataGrid.Items[^1]);
+            SubscribersDataGrid.ScrollIntoView(SubscribersDataGrid.Items[^1], this.FirstNameColumn);
+            SubscribersDataGrid.UpdateLayout();
+            var firstCell = new DataGridCellInfo(SubscribersDataGrid.SelectedItem, this.FirstNameColumn);
+            SubscribersDataGrid.CurrentCell = firstCell;
+            SubscribersDataGrid.BeginEdit();
+        }
     }
 }
