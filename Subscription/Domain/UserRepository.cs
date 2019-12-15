@@ -4,7 +4,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using LaYumba.Functional;
-using static Subscription.Configuration.SettingManager;
 using static LaYumba.Functional.F;
 using Unit = System.ValueTuple;
 
@@ -13,7 +12,7 @@ namespace Subscription.Domain
     public class UserRepository
     {
         private static readonly Regex PinRegex = new Regex("^.{4,12}$");
-        private static readonly string DataFolder = AppSettings.DataFolder;
+        private static readonly string DataFolder = Directory.GetCurrentDirectory();
         private static readonly string SettingsDirectory = Path.Combine(DataFolder, "settings");
         private static readonly string UserFilePath = Path.Combine(SettingsDirectory, "user");
 
