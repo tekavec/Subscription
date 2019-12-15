@@ -135,6 +135,9 @@
   <data name="CancellationReason" xml:space="preserve">
     <value>Cancellation reason</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="CopyFrom" xml:space="preserve">
     <value>Copy from:</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="ExportDataSourceManual" xml:space="preserve">
     <value>Please setup export options:</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter:</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
@@ -209,6 +215,9 @@
   </data>
   <data name="SubscriptionType" xml:space="preserve">
     <value>Subscription type</value>
+  </data>
+  <data name="YearAndMonth" xml:space="preserve">
+    <value>Year and month</value>
   </data>
   <data name="YourPin" xml:space="preserve">
     <value>Your PIN:</value>

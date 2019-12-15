@@ -115,6 +115,15 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy from:.
         /// </summary>
         public static string CopyFrom {
@@ -174,6 +183,15 @@ namespace Subscription.Properties {
         public static string ExportDataSourceManual {
             get {
                 return ResourceManager.GetString("ExportDataSourceManual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter:.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
             }
         }
         
@@ -336,6 +354,15 @@ namespace Subscription.Properties {
         public static string SubscriptionType {
             get {
                 return ResourceManager.GetString("SubscriptionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year and month.
+        /// </summary>
+        public static string YearAndMonth {
+            get {
+                return ResourceManager.GetString("YearAndMonth", resourceCulture);
             }
         }
         

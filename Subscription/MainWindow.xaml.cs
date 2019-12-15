@@ -108,5 +108,10 @@ namespace Subscription
         {
             model.MakeDirty();
         }
+
+        private void ClearFilterButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            model.FilterString = string.Empty;
+        }
     }
 }

@@ -135,6 +135,9 @@
   <data name="CancellationReason" xml:space="preserve">
     <value>Razlog odjave</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Počisti</value>
+  </data>
   <data name="CopyFrom" xml:space="preserve">
     <value>Kopiraj iz:</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="ExportDataSourceManual" xml:space="preserve">
     <value>Določite nastavitve izvoza:</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter:</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Ime</value>
@@ -209,6 +215,9 @@
   </data>
   <data name="SubscriptionType" xml:space="preserve">
     <value>Funkcija</value>
+  </data>
+  <data name="YearAndMonth" xml:space="preserve">
+    <value>Obdobje</value>
   </data>
   <data name="YourPin" xml:space="preserve">
     <value>Vaš PIN:</value>

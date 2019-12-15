@@ -47,32 +47,55 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-            <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
-                <Button Padding="12,0" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
-                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
+        <ToolBar Band="1" BandIndex="1" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Padding="12,0" x:Name="SaveDataSourceToolbarButton" Click="SaveDataSource_OnClick">
+                <TextBlock VerticalAlignment="Bottom" FontSize="13">
                         <fa:Icon FaName="save" Padding="6" Margin="0,2,0,-4" />
                         <Label Content="{x:Static p:Resources.Save}"></Label>
                 </TextBlock>
-                </Button>
-                <Button Padding="12,0" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
-                    <TextBlock VerticalAlignment="Bottom" FontSize="13">
+            </Button>
+            <Button Padding="12,0" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
+                <TextBlock VerticalAlignment="Bottom" FontSize="13">
                         <fa:Icon FaName="file" Padding="6" Margin="0,2,0,-4" />
                         <Label Content="{x:Static p:Resources.NewDataSource}"></Label>
-                    </TextBlock>
-                </Button>
-                <Button Padding="12,0" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">
-                    <TextBlock VerticalAlignment="Center" FontSize="13">
+                </TextBlock>
+            </Button>
+            <Button Padding="12,0" x:Name="ExportDataSourceToolbarButton" Click="ExportDataSource_OnClick">
+                <TextBlock VerticalAlignment="Center" FontSize="13">
                         <fa:Icon FaName="file-export" Padding="6" Margin="0,2,0,-4" />
                         <Label Content="{x:Static p:Resources.ExportDataSource}"></Label>
+                </TextBlock>
+            </Button>
+        </ToolBar>
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="Beige" >
+            <Label Margin="6" FontWeight="Bold" FontSize="18" Content="{x:Static p:Resources.YearAndMonth}" />
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="1" Background="Beige">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="350" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Margin="6" FontWeight="Bold" FontSize="18"  Content="{x:Static p:Resources.AppName}" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label FontWeight="Bold" Margin="12" Content="{x:Static p:Resources.Filter}" />
+                <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}" Margin="0,12" VerticalContentAlignment="Center" MinWidth="100" HorizontalAlignment="Stretch" />
+                <Button x:Name="ClearFilterButton" Margin="12,6" Padding="2" Height="32" Click="ClearFilterButton_OnClick">
+                    <TextBlock VerticalAlignment="Center">
+                        <fa:Icon FaName="times-circle" Padding="4" Margin="0,3,0,0"/>
+                        <Label  Content="{x:Static p:Resources.Clear}"></Label>
                     </TextBlock>
                 </Button>
-            </ToolBar>
-        <StackPanel Grid.Column="0" Grid.Row="1" >
-            <Label Margin="12,12,0,0" FontWeight="Bold" Content="{x:Static p:Resources.SelectYearAndMonth}" />
-            <ComboBox  x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Height="24" Margin="12">
-            </ComboBox>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Column="0" Grid.Row="2" >
+            <ListBox  
+                x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Margin="12">
+            </ListBox>
             <ListBox x:Name="MonthsListBox" 
                      ItemsSource="{Binding Months}" 
                      SelectedItem="{Binding SelectedMonth}" 
@@ -92,8 +115,8 @@
                 </TextBlock>
             </Button>
         </StackPanel>
-        <DataGrid 
-            Grid.Column="1" Grid.Row="1" x:Name="SubscribersDataGrid" 
+        <DataGrid  Grid.Column="1" Grid.Row="2" 
+            x:Name="SubscribersDataGrid" 
             ItemsSource="{Binding Subscribers, UpdateSourceTrigger=LostFocus, IsAsync=True, Mode=TwoWay}" 
             AddingNewItem="SubscribersDataGrid_OnAddingNewItem"
             PreparingCellForEdit="SubscribersDataGrid_OnPreparingCellForEdit"
@@ -112,7 +135,7 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="FirstNameColumn" Width="180" Header="{x:Static p:Resources.FirstName}" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="180" Header="{x:Static p:Resources.LastName}" Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="200" Header="{x:Static p:Resources.LastName}" Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.Address}" Binding="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="75" Header="{x:Static p:Resources.PostCode}" Binding="{Binding PostCode, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.PostName}" Binding="{Binding PostName, UpdateSourceTrigger=PropertyChanged}" />

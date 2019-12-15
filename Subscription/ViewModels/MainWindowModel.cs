@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Data;
 using Subscription.Domain;
 using LaYumba.Functional;
 using Subscription.Annotations;
@@ -22,9 +24,43 @@ namespace Subscription.ViewModels
             previousSelectedMonth = SelectedMonth;
             previousSelectedYear = SelectedYear;
             Subscribers = new ObservableCollection<Subscriber>();
+
+        }
+
+        public bool Filter(object obj)
+        {
+            if (obj is Subscriber data)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
+                {
+                    return data.FirstName.Contains(_filterString) || data.LastName.Contains(_filterString);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public string FilterString
+        {
+            get => _filterString;
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged(nameof(FilterString));
+                FilterCollection();
+            }
+        }
+
+        private void FilterCollection()
+        {
+            subscribersView?.Refresh();
         }
 
         private ObservableCollection<Subscriber> subscribers;
+        
+        private ICollectionView subscribersView;
+
+        private string _filterString;
 
         private const int AppStartYear = 2019;
 
@@ -61,6 +97,12 @@ namespace Subscription.ViewModels
             var allSubscribers= SubscriberRepository.GetAll(GetSelectedYearAndMonth());
             allSubscribers.ForEach(a => a.PropertyChanged += Subscriber_PropertyChanged);
             Subscribers = new ObservableCollection<Subscriber>(allSubscribers);
+            if (Subscribers.Count > 0)
+            {
+                subscribersView = CollectionViewSource.GetDefaultView(Subscribers);
+                subscribersView.Filter = Filter;
+            }
+
             isDirty = false;
         }
 
