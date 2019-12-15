@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -24,16 +23,15 @@ namespace Subscription.ViewModels
             previousSelectedMonth = SelectedMonth;
             previousSelectedYear = SelectedYear;
             Subscribers = new ObservableCollection<Subscriber>();
-
         }
 
         public bool Filter(object obj)
         {
             if (obj is Subscriber data)
             {
-                if (!string.IsNullOrEmpty(_filterString))
+                if (!string.IsNullOrEmpty(filterString))
                 {
-                    return data.FirstName.Contains(_filterString) || data.LastName.Contains(_filterString);
+                    return data.FirstName.Contains(filterString) || data.LastName.Contains(filterString);
                 }
                 return true;
             }
@@ -42,10 +40,10 @@ namespace Subscription.ViewModels
 
         public string FilterString
         {
-            get => _filterString;
+            get => filterString;
             set
             {
-                _filterString = value;
+                filterString = value;
                 OnPropertyChanged(nameof(FilterString));
                 FilterCollection();
             }
@@ -60,7 +58,7 @@ namespace Subscription.ViewModels
         
         private ICollectionView subscribersView;
 
-        private string _filterString;
+        private string filterString;
 
         private const int AppStartYear = 2019;
 
@@ -79,6 +77,10 @@ namespace Subscription.ViewModels
         public IList<int> Years { get; set; } = new List<int>();
 
         public int SelectedYear { get; set; }
+
+        public string AppName => $"{Properties.Resources.AppName} (v{Version})";
+        
+        public string Version => GetType().Assembly.GetName().Version.ToString();
 
         public ObservableCollection<Subscriber> Subscribers
         {

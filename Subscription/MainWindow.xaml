@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Subscription"
         xmlns:p = "clr-namespace:Subscription.Properties"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.AppName}" 
+        Title="{Binding AppName}" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Closing="MainWindow_OnClosing"
         xml:lang="sl-SI">
