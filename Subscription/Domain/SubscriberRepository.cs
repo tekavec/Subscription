@@ -169,11 +169,16 @@ namespace Subscription.Domain
             return Unit();
         }
 
-        private static CsvHelper.Configuration.Configuration GetCsvConfiguration() =>
-            new CsvHelper.Configuration.Configuration
+        private static CsvHelper.Configuration.Configuration GetCsvConfiguration()
+        {
+            var csvConfiguration = new CsvHelper.Configuration.Configuration
             {
-                Delimiter = AppSettings.DataSourceDelimiter
+                Delimiter = AppSettings.DataSourceDelimiter,
             };
+            csvConfiguration.RegisterClassMap<SubscriberMap>();
+
+            return csvConfiguration;
+        }
 
         private static CsvHelper.Configuration.Configuration GetImportCsvConfiguration() =>
             new CsvHelper.Configuration.Configuration

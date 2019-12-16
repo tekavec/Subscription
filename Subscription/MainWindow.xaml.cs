@@ -87,6 +87,8 @@ namespace Subscription
             DataGridCellInfo firstCell = new DataGridCellInfo(SubscribersDataGrid.SelectedItem, this.FirstNameColumn);
             this.SubscribersDataGrid.CurrentCell = lastCell;
             this.SubscribersDataGrid.CurrentCell = firstCell;
+            SubscribersDataGrid.ScrollIntoView(SubscribersDataGrid.SelectedItem, this.FirstNameColumn);
+            SubscribersDataGrid.UpdateLayout();
             model.SaveDataSource();
         }
 

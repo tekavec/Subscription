@@ -31,7 +31,7 @@ namespace Subscription.ViewModels
             {
                 if (!string.IsNullOrEmpty(filterString))
                 {
-                    return data.FirstName.Contains(filterString) || data.LastName.Contains(filterString);
+                    return data.ForFilterOnly.Contains(filterString.ToLower());
                 }
                 return true;
             }

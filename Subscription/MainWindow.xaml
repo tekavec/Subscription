@@ -78,15 +78,14 @@
             </Button>
         </ToolBar>
         <StackPanel Grid.Column="0" Grid.Row="1" Background="Beige" >
-            <Label Margin="12,12,0,0" FontWeight="Bold" FontSize="20" Content="{x:Static p:Resources.YearAndMonth}" />
+            <Label Margin="12,12,0,0" FontWeight="Bold"  Foreground="DarkSlateGray" FontSize="20" Content="{x:Static p:Resources.YearAndMonth}" />
         </StackPanel>
         <Grid Grid.Column="1" Grid.Row="1" Background="Beige">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="350" />
             </Grid.ColumnDefinitions>
-
-            <Label Grid.Column="0" Margin="12,12,0,0" FontWeight="Bold" FontSize="20"  Content="{x:Static p:Resources.AppName}" />
+            <Label Grid.Column="0" Margin="12,12,0,0" FontWeight="Bold" Foreground="DarkSlateGray" FontSize="20"  Content="{x:Static p:Resources.AppName}" />
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label FontWeight="Bold" Margin="12" Content="{x:Static p:Resources.Filter}" />
                 <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}" Margin="0,12" VerticalContentAlignment="Center" MinWidth="100" HorizontalAlignment="Stretch" />

@@ -139,6 +139,9 @@ namespace Subscription.Domain
             }
         }
 
+        public string ForFilterOnly =>
+            $"{FirstName} {LastName} {Address} {PostCode} {PostName} {Country} {SubscriptionType} {BusinessType} {SubscriptionCancelledOn} {CancellationReason}".ToLower();
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
