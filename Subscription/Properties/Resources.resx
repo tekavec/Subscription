@@ -204,6 +204,9 @@
   <data name="NewSubscriber" xml:space="preserve">
     <value>New subscriber</value>
   </data>
+  <data name="NoSubscribersForCurrentTerm" xml:space="preserve">
+    <value>There are no subscribers for the chosen term. Do you want to copy them from another term?</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>

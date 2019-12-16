@@ -38,16 +38,32 @@ namespace Subscription
             DataContext = model;
         }
 
-        private void MonthsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Term_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             model.SavePreviousSelected();
             model.OnMonthSelectionChanged();
+            if (model.Subscribers.Count == 0)
+            {
+                if (MessageBox.Show(
+                        Properties.Resources.NoSubscribersForCurrentTerm,
+                        Properties.Resources.Question,
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    OpenCreateNewDataSource();
+                }
+            }
         }
 
         private void CreateNewDataSource_OnClick(object sender, RoutedEventArgs e)
         {
             Save();
-            var createDataSource = 
+            OpenCreateNewDataSource();
+        }
+
+        private void OpenCreateNewDataSource()
+        {
+            var createDataSource =
                 new CreateDataSourceDialog(GetCopyFromToParams(), SubscriberRepository.CopyDataSource);
             createDataSource.ShowDialog();
         }

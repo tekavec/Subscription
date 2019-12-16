@@ -99,14 +99,17 @@
             </StackPanel>
         </Grid>
         <StackPanel Grid.Column="0" Grid.Row="2" >
-            <ListBox  
-                x:Name="YearsComboBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Margin="12">
+            <ListBox x:Name="YearsComboBox" 
+                     ItemsSource="{Binding Years}" 
+                     SelectedItem="{Binding SelectedYear}" 
+                     SelectionChanged="Term_OnSelectionChanged"
+                     Margin="12">
             </ListBox>
             <ListBox x:Name="MonthsListBox" 
                      ItemsSource="{Binding Months}" 
                      SelectedItem="{Binding SelectedMonth}" 
+                     SelectionChanged="Term_OnSelectionChanged"
                      SelectionMode="Single"
-                     SelectionChanged="MonthsListBox_OnSelectionChanged"
                      Margin= "12,0,12,24" />
             <Button x:Name="CreateNewDataSourceButton" Click="CreateNewDataSource_OnClick" Margin="12" Height="40">
                 <TextBlock VerticalAlignment="Center">

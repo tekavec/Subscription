@@ -204,6 +204,9 @@
   <data name="NewSubscriber" xml:space="preserve">
     <value>Nov naročnik</value>
   </data>
+  <data name="NoSubscribersForCurrentTerm" xml:space="preserve">
+    <value>V tem obdobju ni še nobenih naročnikov. Ali jih želite skopirati iz katerega drugega obdobja?</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>V redu</value>
   </data>
