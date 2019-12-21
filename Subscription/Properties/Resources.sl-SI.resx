@@ -162,11 +162,14 @@
   <data name="ExportDataSource" xml:space="preserve">
     <value>Izvozi podatke</value>
   </data>
+  <data name="ExportDataSourceError" xml:space="preserve">
+    <value>Pri izvozu podatkov je prišlo do napake.</value>
+  </data>
   <data name="ExportDataSourceManual" xml:space="preserve">
     <value>Določite nastavitve izvoza:</value>
   </data>
   <data name="ExportDataSourceSuccess" xml:space="preserve">
-    <value>Izvoz podatkov je bilo uspešno izvedeno.</value>
+    <value>Izvoz podatkov je bil uspešno izvedeno.</value>
   </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter:</value>

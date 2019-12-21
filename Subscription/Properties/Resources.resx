@@ -162,6 +162,9 @@
   <data name="ExportDataSource" xml:space="preserve">
     <value>Export data source</value>
   </data>
+  <data name="ExportDataSourceError" xml:space="preserve">
+    <value>Export to file was not successful.</value>
+  </data>
   <data name="ExportDataSourceManual" xml:space="preserve">
     <value>Please setup export options:</value>
   </data>

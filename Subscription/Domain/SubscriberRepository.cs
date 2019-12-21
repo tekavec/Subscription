@@ -68,45 +68,25 @@ namespace Subscription.Domain
                             {
                                 externalSubscribers = csvReader.GetRecords<SubscriberImport>().ToArray();
                             }
-
                         }
                     }
-
                 }
 
                 var internalSubscribers = GetAll(exportParams.FromYearAndMonth);
 
-                if (exportParams.CloneRowsForMultipleCopies)
+                foreach (var internalSubscriber in internalSubscribers.Where(a => a.IsPaid && a.SubscriptionCopies > 0))
                 {
-                    foreach (var internalSubscriber in internalSubscribers.Where(a => a.IsPaid))
+                    for (var i = 0; i < internalSubscriber.SubscriptionCopies; i++)
                     {
-                        for (var i = 0; i < internalSubscriber.SubscriptionCopies; i++)
-                        {
-                            var subscriberExport = new SubscriberExport(
-                                internalSubscriber.LastName,
-                                internalSubscriber.FirstName,
-                                internalSubscriber.Address,
-                                internalSubscriber.PostCode,
-                                internalSubscriber.PostName,
-                                internalSubscriber.Country);
-                            internalSubscribersWithCopies.Add(subscriberExport);
-                        }
+                        var subscriberExport = new SubscriberExport(
+                            internalSubscriber.LastName,
+                            internalSubscriber.FirstName,
+                            internalSubscriber.Address,
+                            internalSubscriber.PostCode,
+                            internalSubscriber.PostName,
+                            internalSubscriber.Country);
+                        internalSubscribersWithCopies.Add(subscriberExport);
                     }
-                }
-                else
-                {
-                    internalSubscribersWithCopies = internalSubscribers
-                        .Where(a => a.IsPaid)
-                        .Select(a =>
-                            new SubscriberExport(
-                                a.LastName,
-                                a.FirstName,
-                                a.Address,
-                                a.PostCode,
-                                a.PostName,
-                                a.Country))
-                        .ToList();
-                    
                 }
 
                 var subscribersToExportLength = internalSubscribersWithCopies.Count + externalSubscribers.Count();
@@ -130,14 +110,22 @@ namespace Subscription.Domain
                     subscribersToExport[internalSubscribersWithCopies.Count + externalCount++] = subscriberExport;
                 });
 
-                var wb = new XLWorkbook();
-                var ws = wb.Worksheets.Add("Subscription");
-                ws.Cell(1, 1).InsertTable(subscribersToExport
+                var wbLocal = new XLWorkbook();
+                var wsLocal = wbLocal.Worksheets.Add("Subscription");
+                wsLocal.Cell(1, 1).InsertTable(subscribersToExport.Where(a => string.IsNullOrEmpty(a.Country))
+                    .OrderBy(a => a.PostCode)
+                    .ThenBy(a => a.LastName)
+                    .AsEnumerable());
+                wbLocal.SaveAs(exportParams.ExportFile.Replace(".xlsx", "-local.xlsx"));
+
+                var wbInternational = new XLWorkbook();
+                var wsInternational = wbInternational.Worksheets.Add("Subscription");
+                wsInternational.Cell(1, 1).InsertTable(subscribersToExport.Where(a => !string.IsNullOrEmpty(a.Country))
                     .OrderBy(a => a.Country)
                     .ThenBy(a => a.PostCode)
                     .ThenBy(a => a.LastName)
                     .AsEnumerable());
-                wb.SaveAs(exportParams.ExportFile);
+                wbInternational.SaveAs(exportParams.ExportFile.Replace(".xlsx", "-international.xlsx"));
             }
             catch (Exception ex)
             {

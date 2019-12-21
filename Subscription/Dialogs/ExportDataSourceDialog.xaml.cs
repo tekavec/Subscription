@@ -48,13 +48,26 @@ namespace Subscription.Dialogs
                     model.CloneRowsForMultipleCopies, 
                     model.MergeFilePath,
                     saveFileDialog.FileName);
-                if (mergeAndExport(exportParams).Success)
-                    MessageBox.Show(
-                        this, 
-                        Properties.Resources.ExportDataSourceSuccess, 
-                        Properties.Resources.Information, 
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
+                mergeAndExport(exportParams).Match(
+                    Exception: (error) =>
+                    {
+                        MessageBox.Show(
+                            this,
+                            $"{Properties.Resources.ExportDataSourceError} ({error.Message})",
+                            Properties.Resources.Error,
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    },
+                    Success: _ =>
+                    {
+                        MessageBox.Show(
+                            this,
+                            Properties.Resources.ExportDataSourceSuccess,
+                            Properties.Resources.Information,
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                       Close();
+                    });
             }
         }
     }

@@ -196,6 +196,15 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to file was not successful..
+        /// </summary>
+        public static string ExportDataSourceError {
+            get {
+                return ResourceManager.GetString("ExportDataSourceError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please setup export options:.
         /// </summary>
         public static string ExportDataSourceManual {
