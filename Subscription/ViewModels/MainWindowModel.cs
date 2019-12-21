@@ -55,7 +55,7 @@ namespace Subscription.ViewModels
         }
 
         private ObservableCollection<Subscriber> subscribers;
-        
+
         private ICollectionView subscribersView;
 
         private string filterString;
@@ -92,6 +92,10 @@ namespace Subscription.ViewModels
             }
         }
 
+        public IList<string> Countries { get; private set; }
+        public IList<string> SubscriptionTypes { get; private set; }
+        public IList<string> BusinessTypes { get; private set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnMonthSelectionChanged()
@@ -103,6 +107,12 @@ namespace Subscription.ViewModels
             {
                 subscribersView = CollectionViewSource.GetDefaultView(Subscribers);
                 subscribersView.Filter = Filter;
+                Countries =
+                    allSubscribers.Select(a => a.Country).Distinct().OrderBy(a => a).ToList();
+                SubscriptionTypes =
+                    allSubscribers.Select(a => a.SubscriptionType).Distinct().OrderBy(a => a).ToList();
+                BusinessTypes =
+                    allSubscribers.Select(a => a.BusinessType).Distinct().OrderBy(a => a).ToList();
             }
 
             isDirty = false;

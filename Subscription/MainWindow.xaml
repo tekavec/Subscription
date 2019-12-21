@@ -148,9 +148,33 @@
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.Address}" Binding="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="75" Header="{x:Static p:Resources.PostCode}" Binding="{Binding PostCode, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.PostName}" Binding="{Binding PostName, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="150" Header="{x:Static p:Resources.Country}" Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="120" Header="{x:Static p:Resources.SubscriptionType}" Binding="{Binding SubscriptionType, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.BusinessType}" Binding="{Binding BusinessType, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.Country}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox IsEditable="True" BorderThickness="0" Padding="0"
+                                      Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" 
+                                      ItemsSource="{Binding Path=DataContext.Countries, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.SubscriptionType}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox IsEditable="True" BorderThickness="0" Padding="0"
+                                      Text="{Binding SubscriptionType, UpdateSourceTrigger=PropertyChanged}" 
+                                      ItemsSource="{Binding Path=DataContext.SubscriptionTypes, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.BusinessType}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox IsEditable="True" BorderThickness="0" Padding="0"
+                                      Text="{Binding BusinessType, UpdateSourceTrigger=PropertyChanged}" 
+                                      ItemsSource="{Binding Path=DataContext.BusinessTypes, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Width="75" Header="{x:Static p:Resources.SubscriptionCopies}" Binding="{Binding SubscriptionCopies, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridCheckBoxColumn Width="75" Header="{x:Static p:Resources.IsPaid}" Binding="{Binding IsPaid, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="100" Header="{x:Static p:Resources.SubscriptionCancelledOn}" Binding="{Binding SubscriptionCancelledOn, UpdateSourceTrigger=PropertyChanged}" />
