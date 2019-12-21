@@ -110,10 +110,9 @@ namespace Subscription
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                var subscriber = SubscribersDataGrid.SelectedItem;
-                if (subscriber != null)
+                if (SubscribersDataGrid.SelectedItem is Subscriber subscriber)
                 {
-                    model.Subscribers.Remove((Subscriber) subscriber);
+                    model.Subscribers.Remove(subscriber);
                     model.MakeDirty();
                 }
 
