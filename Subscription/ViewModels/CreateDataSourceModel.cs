@@ -11,6 +11,7 @@ namespace Subscription.ViewModels
             SelectedFromYear = from.Year;
             SelectedFromMonth = from.Month;
             Month.GetAllMonths().ForEach(a => FromMonths.Add(a));
+            FromYears.Add(from.Year - 1);
             FromYears.Add(from.Year);
             FromYears.Add(from.Year + 1);
 

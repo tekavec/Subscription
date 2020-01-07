@@ -107,15 +107,35 @@ namespace Subscription.ViewModels
             {
                 subscribersView = CollectionViewSource.GetDefaultView(Subscribers);
                 subscribersView.Filter = Filter;
-                Countries =
-                    allSubscribers.Select(a => a.Country).Distinct().OrderBy(a => a).ToList();
-                SubscriptionTypes =
-                    allSubscribers.Select(a => a.SubscriptionType).Distinct().OrderBy(a => a).ToList();
-                BusinessTypes =
-                    allSubscribers.Select(a => a.BusinessType).Distinct().OrderBy(a => a).ToList();
+                RefreshLookupValues();
             }
 
             isDirty = false;
+        }
+
+        private void RefreshLookupValues()
+        {
+            RefreshCountries();
+            RefreshSubscriptionTypes();
+            RefreshBusinessTypes();
+        }
+
+        internal void RefreshCountries()
+        {
+            Countries = Subscribers.Select(a => a.Country).Distinct().OrderBy(a => a).ToList();
+            OnPropertyChanged(nameof(Countries));
+        }
+
+        internal void RefreshSubscriptionTypes()
+        {
+            SubscriptionTypes = Subscribers.Select(a => a.SubscriptionType).Distinct().OrderBy(a => a).ToList();
+            OnPropertyChanged(nameof(SubscriptionTypes));
+        }
+
+        internal void RefreshBusinessTypes()
+        {
+            BusinessTypes = Subscribers.Select(a => a.BusinessType).Distinct().OrderBy(a => a).ToList();
+            OnPropertyChanged(nameof(BusinessTypes));
         }
 
         private void Subscriber_PropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -93,9 +93,7 @@ namespace Subscription
         }
 
         private YearAndMonth GetCopyFromToParams() => 
-            new YearAndMonth(
-                model.Years[this.YearsComboBox.SelectedIndex], 
-                model.Months[this.MonthsListBox.SelectedIndex]);
+            new YearAndMonth(model.SelectedYear, model.SelectedMonth);
 
         private void SubscribersDataGrid_OnAddingNewItem(object sender, AddingNewItemEventArgs e)
         {
@@ -149,6 +147,21 @@ namespace Subscription
         private void SubscribersDataGrid_OnLoadingRow(object sender, DataGridRowEventArgs e)
         {
             e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+
+        private void CountryComboBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            model.RefreshCountries();
+        }
+
+        private void SubscriptionTypeComboBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            model.RefreshSubscriptionTypes();
+        }
+
+        private void BusinessTypeComboBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            model.RefreshBusinessTypes();
         }
     }
 }
