@@ -124,6 +124,15 @@ namespace Subscription.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear sorting.
+        /// </summary>
+        public static string ClearSorting {
+            get {
+                return ResourceManager.GetString("ClearSorting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy from:.
         /// </summary>
         public static string CopyFrom {

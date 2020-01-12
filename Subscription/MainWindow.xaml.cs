@@ -2,6 +2,8 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using LaYumba.Functional;
 using Subscription.Dialogs;
 using Subscription.Domain;
 using Subscription.ViewModels;
@@ -162,6 +164,13 @@ namespace Subscription
         private void BusinessTypeComboBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
             model.RefreshBusinessTypes();
+        }
+
+        private void ClearSorting_OnClick(object sender, RoutedEventArgs e)
+        {
+            var view = CollectionViewSource.GetDefaultView(SubscribersDataGrid.ItemsSource);
+            view?.SortDescriptions.Clear();
+            SubscribersDataGrid.Columns.ForEach( column => column.SortDirection = null);
         }
     }
 }

@@ -138,6 +138,9 @@
   <data name="Clear" xml:space="preserve">
     <value>Počisti</value>
   </data>
+  <data name="ClearSorting" xml:space="preserve">
+    <value>Odstrani sortiranje</value>
+  </data>
   <data name="CopyFrom" xml:space="preserve">
     <value>Kopiraj iz:</value>
   </data>

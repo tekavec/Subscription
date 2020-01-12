@@ -24,8 +24,9 @@ namespace Subscription.UnitTests.ViewModels
                     model.ToMonths[i].Should().Be(new Month(i + 1));
                 }
 
-                model.FromYears[0].Should().Be(year);
-                model.FromYears[1].Should().Be(year+1);
+                model.FromYears[0].Should().Be(year-1);
+                model.FromYears[1].Should().Be(year);
+                model.FromYears[2].Should().Be(year+1);
                 model.ToYears[0].Should().Be(year);
                 model.ToYears[1].Should().Be(year+1);
 
@@ -35,7 +36,6 @@ namespace Subscription.UnitTests.ViewModels
                 var fromDate = new DateTime(model.SelectedFromYear, model.SelectedFromMonth.Number, 1);
                 var toDate = new DateTime(model.SelectedToYear, model.SelectedToMonth.Number, 1);
                 fromDate.AddMonths(1).Should().Be(toDate);
-
             }
         }
     }

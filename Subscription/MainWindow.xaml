@@ -63,6 +63,12 @@
                         <Label Content="{x:Static p:Resources.Save}"></Label>
                 </TextBlock>
             </Button>
+            <Button Padding="12,0" x:Name="ClearSortingToolbarButton" Click="ClearSorting_OnClick">
+                <TextBlock VerticalAlignment="Bottom">
+                        <fa:Icon FaName="sort" Padding="9" Margin="0,2,-8,-4" />
+                        <Label Content="{x:Static p:Resources.ClearSorting}"></Label>
+                </TextBlock>
+            </Button>
             <Separator Margin="4" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
             <Button Padding="12,0" x:Name="CreateNewDataSourceToolbarButton" Click="CreateNewDataSource_OnClick">
                 <TextBlock VerticalAlignment="Bottom">
@@ -129,6 +135,7 @@
             AddingNewItem="SubscribersDataGrid_OnAddingNewItem"
             PreparingCellForEdit="SubscribersDataGrid_OnPreparingCellForEdit"
             LoadingRow="SubscribersDataGrid_OnLoadingRow"
+            CanUserDeleteRows="False"
             ScrollViewer.HorizontalScrollBarVisibility="Visible"
             ScrollViewer.VerticalScrollBarVisibility="Visible"
             EnableColumnVirtualization="True"
@@ -148,7 +155,7 @@
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.Address}" Binding="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="75" Header="{x:Static p:Resources.PostCode}" Binding="{Binding PostCode, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Width="150" Header="{x:Static p:Resources.PostName}" Binding="{Binding PostName, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.Country}">
+                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.Country}" SortMemberPath="Country">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox x:Name="CountryComboBox" 
@@ -161,7 +168,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.SubscriptionType}">
+                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.SubscriptionType}" SortMemberPath="SubscriptionType">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox x:Name="SubscriptionTypeComboBox" 
@@ -174,7 +181,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.BusinessType}">
+                <DataGridTemplateColumn MinWidth="120" Header="{x:Static p:Resources.BusinessType}" SortMemberPath="BusinessType">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox x:Name="BusinessTypeComboBox"
@@ -189,7 +196,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Width="75" Header="{x:Static p:Resources.SubscriptionCopies}" Binding="{Binding SubscriptionCopies, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridCheckBoxColumn Width="75" Header="{x:Static p:Resources.IsPaid}" Binding="{Binding IsPaid, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.SubscriptionCancelledOn}" Binding="{Binding SubscriptionCancelledOn, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.SubscriptionCancelledOn}" Binding="{Binding SubscriptionCancelledOn, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn x:Name="CancellationReasonColumn" Width="150" Header="{x:Static p:Resources.CancellationReason}" Binding="{Binding CancellationReason, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTemplateColumn Header="{x:Static p:Resources.Delete}" Width="50">
                     <DataGridTemplateColumn.CellTemplate>

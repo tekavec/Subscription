@@ -138,6 +138,9 @@
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="ClearSorting" xml:space="preserve">
+    <value>Clear sorting</value>
+  </data>
   <data name="CopyFrom" xml:space="preserve">
     <value>Copy from:</value>
   </data>
