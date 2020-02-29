@@ -196,7 +196,18 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Width="75" Header="{x:Static p:Resources.SubscriptionCopies}" Binding="{Binding SubscriptionCopies, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridCheckBoxColumn Width="75" Header="{x:Static p:Resources.IsPaid}" Binding="{Binding IsPaid, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="100" Header="{x:Static p:Resources.SubscriptionCancelledOn}" Binding="{Binding SubscriptionCancelledOn, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTemplateColumn Header="{x:Static p:Resources.SubscriptionCancelledOn}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding SubscriptionCancelledOn, ConverterCulture='sl-SI', StringFormat=dd.MM.yyyy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding SubscriptionCancelledOn,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn x:Name="CancellationReasonColumn" Width="150" Header="{x:Static p:Resources.CancellationReason}" Binding="{Binding CancellationReason, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTemplateColumn Header="{x:Static p:Resources.Delete}" Width="50">
                     <DataGridTemplateColumn.CellTemplate>

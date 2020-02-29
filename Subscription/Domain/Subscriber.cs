@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Subscription.Annotations;
 
@@ -15,7 +16,7 @@ namespace Subscription.Domain
         private string subscriptionType;
         private string businessType;
         private int subscriptionCopies;
-        private string subscriptionCancelledOn;
+        private DateTime? subscriptionCancelledOn;
         private string cancellationReason;
         private bool isPaid;
 
@@ -109,7 +110,7 @@ namespace Subscription.Domain
             }
         }
 
-        public string SubscriptionCancelledOn
+        public DateTime? SubscriptionCancelledOn
         {
             get => subscriptionCancelledOn;
             set
