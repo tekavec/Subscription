@@ -172,7 +172,7 @@
     <value>Določite nastavitve izvoza:</value>
   </data>
   <data name="ExportDataSourceSuccess" xml:space="preserve">
-    <value>Izvoz podatkov je bil uspešno izvedeno.</value>
+    <value>Izvoz podatkov je bil uspešno izveden.</value>
   </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter:</value>

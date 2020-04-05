@@ -35,39 +35,46 @@ namespace Subscription.Dialogs
 
         private void ExportButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var saveFileDialog = new SaveFileDialog
+            try
             {
-                FileName = "export.xlsx",
-                Filter = "Excel Worksheets|*.xlsx"
-            };
+                var saveFileDialog = new SaveFileDialog
+                {
+                    FileName = "export.xlsx",
+                    Filter = "Excel Worksheets|*.xlsx"
+                };
 
-            if (saveFileDialog.ShowDialog() == true)
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    var exportParams = new ExportParams(
+                        new YearAndMonth(model.SelectedFromYear, model.SelectedFromMonth), 
+                        model.CloneRowsForMultipleCopies, 
+                        model.MergeFilePath,
+                        saveFileDialog.FileName);
+                    mergeAndExport(exportParams).Match(
+                        Exception: (error) =>
+                        {
+                            MessageBox.Show(
+                                this,
+                                $"{Properties.Resources.ExportDataSourceError} ({error.Message})",
+                                Properties.Resources.Error,
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                        },
+                        Success: _ =>
+                        {
+                            MessageBox.Show(
+                                this,
+                                Properties.Resources.ExportDataSourceSuccess,
+                                Properties.Resources.Information,
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+                           Close();
+                        });
+                }
+            }
+            catch (Exception ex)
             {
-                var exportParams = new ExportParams(
-                    new YearAndMonth(model.SelectedFromYear, model.SelectedFromMonth), 
-                    model.CloneRowsForMultipleCopies, 
-                    model.MergeFilePath,
-                    saveFileDialog.FileName);
-                mergeAndExport(exportParams).Match(
-                    Exception: (error) =>
-                    {
-                        MessageBox.Show(
-                            this,
-                            $"{Properties.Resources.ExportDataSourceError} ({error.Message})",
-                            Properties.Resources.Error,
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                    },
-                    Success: _ =>
-                    {
-                        MessageBox.Show(
-                            this,
-                            Properties.Resources.ExportDataSourceSuccess,
-                            Properties.Resources.Information,
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information);
-                       Close();
-                    });
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

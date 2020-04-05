@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using ClosedXML.Excel;
 using CsvHelper;
+using CsvHelper.Configuration;
 using LaYumba.Functional;
 using static Subscription.Configuration.SettingManager;
 using static LaYumba.Functional.F;
@@ -157,9 +159,9 @@ namespace Subscription.Domain
             return Unit();
         }
 
-        private static CsvHelper.Configuration.Configuration GetCsvConfiguration()
+        private static CsvConfiguration GetCsvConfiguration()
         {
-            var csvConfiguration = new CsvHelper.Configuration.Configuration
+            var csvConfiguration = new CsvConfiguration(CultureInfo.CurrentCulture)
             {
                 Delimiter = AppSettings.DataSourceDelimiter,
             };
@@ -168,8 +170,8 @@ namespace Subscription.Domain
             return csvConfiguration;
         }
 
-        private static CsvHelper.Configuration.Configuration GetImportCsvConfiguration() =>
-            new CsvHelper.Configuration.Configuration
+        private static CsvConfiguration GetImportCsvConfiguration() =>
+            new CsvConfiguration(CultureInfo.CurrentCulture)
             {
                 Delimiter = AppSettings.DataSourceDelimiter,
                 HasHeaderRecord = false,

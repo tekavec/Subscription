@@ -1,4 +1,5 @@
-﻿using CsvHelper.Configuration;
+﻿using System.Globalization;
+using CsvHelper.Configuration;
 
 namespace Subscription.Domain
 {
@@ -6,7 +7,7 @@ namespace Subscription.Domain
     {
         public SubscriberMap()
         {
-            AutoMap();
+            AutoMap(CultureInfo.CurrentCulture);
             Map(m => m.ForFilterOnly).Ignore();
         }
     }
